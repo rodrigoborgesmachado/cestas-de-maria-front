@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import familiesApi from "../../../services/apiServices/familiesApi";
 import { useDispatch } from "react-redux";
 import { setLoading } from "../../../services/redux/loadingSlice";
@@ -12,6 +12,23 @@ const AddFamilyPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [status, setStatus] = useState([]);
+    const { code } = useParams();
+    const [formData, setFormData] = useState({
+        name: "",
+        basketquantity: "",
+        phone: "",
+        document: "",
+        adults: "",
+        children: "",
+        issocialprogrambeneficiary: "0",
+        isfromlocal: "1",
+        housingsituation: "",
+        hasseverelimitation: "0",
+        deliveryWeek: 1,
+        neighborhood: "",
+        address: "",
+        familystatusid: 2,
+    });
 
     useEffect(() => {
         const fetchStatus = async () => {
@@ -27,25 +44,40 @@ const AddFamilyPage = () => {
             }
         };
 
-        fetchStatus();
-    }, [dispatch]);
+        const fetchFamily =  async () => {
+            dispatch(setLoading(true));
+            try {
+                const response = await familiesApi.getFamilyByCode(code, {include: 'Familystatus'});
+                
+                setFormData({
+                    name: response.Name || "",
+                    basketquantity: response.Basketquantity || "",
+                    phone: response.Phone || "",
+                    document: response.Document || "",
+                    adults: response.Adults || "",
+                    children: response.Children || "",
+                    issocialprogrambeneficiary: response.Issocialprogrambeneficiary ? "1" : "0",
+                    isfromlocal: response.Isfromlocal ? "1" : "0",
+                    housingsituation: response.Housingsituation || "",
+                    hasseverelimitation: response.Hasseverelimitation ? "1" : "0",
+                    deliveryWeek: response.DeliveryWeek || 1,
+                    neighborhood: response.Neighborhood || "",
+                    address: response.Address || "",
+                    familystatusid: response.Familystatusid || 2,
+                });
+            } catch (error) {
+                toast.error('Erro ao buscar os dados da família.');
+            } finally {
+                dispatch(setLoading(false));
+            }
+        }
 
-    // State for form inputs
-    const [formData, setFormData] = useState({
-        name: "",
-        basketquantity: "",
-        phone: "",
-        document: "",
-        adults: "",
-        children: "",
-        issocialprogrambeneficiary: "0",
-        isfromlocal: "1",
-        housingsituation: "",
-        hasseverelimitation: "0",
-        neighborhood: "",
-        address: "",
-        familystatusid: 3,
-    });
+        
+        fetchStatus();
+
+        if(code)
+            fetchFamily();
+    }, [code, dispatch]);
 
     // Handle form input change
     const handleChange = (e) => {
@@ -59,9 +91,19 @@ const AddFamilyPage = () => {
         dispatch(setLoading(true));
 
         try {
-            await familiesApi.createFamily(formData);
-            toast.success("Família adicionada com sucesso!");
-            navigate("/familias"); // Redirect after successful addition
+            if(!code)
+            {
+                await familiesApi.createFamily(formData);
+                toast.success("Família adicionada com sucesso!");
+                navigate("/familias"); 
+            }
+            else
+            {
+                await familiesApi.updateFamily(code, formData);
+                toast.success("Família editada com sucesso!");
+                navigate("/familias/" + code); 
+            }
+            
         } catch (error) {
             toast.error("Erro ao adicionar família. Verifique os dados e tente novamente.");
         } finally {
@@ -108,6 +150,11 @@ const AddFamilyPage = () => {
                     </div>
 
                     <div className="form-group">
+                        <label>Semana para entrega:</label>
+                        <input type="number" name="deliveryWeek" value={formData.deliveryWeek} onChange={handleChange} required />
+                    </div>
+
+                    <div className="form-group">
                         <label>Beneficiário de Programa Social:</label>
                         <select name="issocialprogrambeneficiary" value={formData.issocialprogrambeneficiary} onChange={handleChange} required>
                             <option value="0">Não</option>
@@ -118,7 +165,7 @@ const AddFamilyPage = () => {
 
                 <div className="flex-row wrap gap-default">
                     <div className="form-group">
-                        <label>É da Localidade:</label>
+                        <label>É de Uberlândia:</label>
                         <select name="isfromlocal" value={formData.isfromlocal} onChange={handleChange} required>
                             <option value="1">Sim</option>
                             <option value="0">Não</option>
@@ -169,7 +216,7 @@ const AddFamilyPage = () => {
                     </div>
                 </div>
 
-                <button type="submit" className="admin-button">Adicionar Família</button>
+                <button type="submit" className="admin-button">{code ? 'Editar família' : 'Adicionar Família'}</button>
             </form>
         </div>
     );

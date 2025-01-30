@@ -52,9 +52,9 @@ const familiesApi = {
      * @param {Object} familyData - The family data to update.
      * @returns {Promise<Object>} - The updated family data.
      */
-    updateFamily: async (familyData) => {
+    updateFamily: async (code, familyData) => {
         try {
-            const response = await api.put('/Families', familyData);
+            const response = await api.post('/Families/edit/' + code, familyData);
             return response.data;
         } catch (error) {
             console.error('Error updating family:', error);

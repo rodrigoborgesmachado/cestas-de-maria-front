@@ -19,6 +19,7 @@ const AdminRoutes = () => (
       <Route path="/familias" element={<FamilyListPage />} />
       <Route path="/familias/:code" element={<FamilyPage />} />
       <Route path="/familias/adicionar" element={<AddFamilyPage />} />
+      <Route path="/familias/editar/:code" element={<AddFamilyPage />} />
       <Route path="/*" element={<DashboardPage />} />
       </Routes>
   </AdminLayout>

@@ -5,18 +5,22 @@ import { useDispatch } from 'react-redux';
 import { setLoading } from '../../../services/redux/loadingSlice';
 import { toast } from 'react-toastify';
 import { maskCPF, maskPhone } from '../../../utils/masks';
+import { useNavigate } from 'react-router-dom';
 
 const FamilyPage = () => {
     const { code } = useParams();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [family, setFamily] = useState(undefined);
+    const [historyStatus, setHistoryStatus] = useState([]);
 
     useEffect(() => {
-        const fetchOrder =  async () => {
+        const fetchFamily =  async () => {
             dispatch(setLoading(true));
             try {
-                const response = await familiesApi.getFamilyByCode(code, {include: 'Familystatus'});
+                const response = await familiesApi.getFamilyByCode(code, {include: 'Familystatus,Familyfamilystatushistory.NewFamilystatus,Familyfamilystatushistory.OldFamilystatus,Admins'});
                 setFamily(response);
+                setHistoryStatus(response.Familyfamilystatushistory);
             } catch (error) {
                 toast.error('Erro ao buscar os dados da família.');
             } finally {
@@ -24,7 +28,7 @@ const FamilyPage = () => {
             }
         }
 
-        fetchOrder();
+        fetchFamily();
     }, [code, dispatch]);
 
     if(family === undefined)
@@ -33,11 +37,17 @@ const FamilyPage = () => {
     return (
     <div className="container-admin-page">
         <div className='space-double-bottom'>
-            <div className='flex-space-between margin-bottom'>
+            <div className='flex-space-between margin-bottom-default wrap'>
                 <h1>Família: {family.Name} </h1>
+                <button className='main-button' onClick={() => navigate('/familias/editar/' + family.Id)}>
+                    Editar
+                </button>
             </div>
             <div>
                 <div className="box margin-bottom-double-default">
+                    <div className='margin-bottom-double-default'>
+                        <h2>Informações Principais</h2>
+                    </div>
                     <div className="info-group">
                         <p><strong>Id:</strong> {family.Id}</p>
                         <p><strong>Nome:</strong> {family.Name}</p>
@@ -54,11 +64,12 @@ const FamilyPage = () => {
                         <p><strong>Endereço:</strong> {family.Address}</p>
                         <p><strong>Semana da Entrega:</strong> {family.DeliveryWeek}</p>
                         <p><strong>Status:</strong> {family.Familystatus?.Description}</p>
+                        <p><strong>Criado por:</strong> {family.Admins?.Name}</p>
                     </div>
                 </div>
 
                 <div className="box margin-bottom-double-default">
-                    <div>
+                    <div className='margin-bottom-double-default'>
                         <h2>Informações Adicionais</h2>
                     </div>
                     <div className="info-group">
@@ -68,6 +79,20 @@ const FamilyPage = () => {
                         <p><strong>Deletado:</strong> {family.IsDeleted ? 'Sim' : 'Não'}</p>
                     </div>
                 </div>
+
+                {
+                    historyStatus && historyStatus.length > 0 &&
+                    <div className="box margin-bottom-double-default">
+                        <div className='margin-bottom-double-default'>
+                            <h2>Histórico de Status</h2>
+                        </div>
+                    {historyStatus.map((item) => (
+                        <div className="info-group">
+                            <p>Em <strong>{new Date(item.Created).toLocaleString()}</strong> foi atualizado do status <strong>{item.OldFamilystatus.Description}</strong> para o status <strong>{item.NewFamilystatus.Description}</strong>.</p>
+                        </div>
+                    ))}
+                    </div>
+                }
             </div>
 
         </div>

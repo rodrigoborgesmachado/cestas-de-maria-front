@@ -6,12 +6,12 @@ import { useDispatch } from 'react-redux';
 import configService from '../../../services/configService';
 import Pagination from '../../../components/common/Pagination/Pagination'; 
 import { toast } from 'react-toastify';
-import { putDateOnPattern } from '../../../utils/functions';
 import FilterComponent from '../../../components/admin/FilterComponent/FilterComponent';
 import { saveAs } from 'file-saver';
 import { maskCPF, maskPhone } from '../../../utils/masks';
 import EyeIcon from '../../../components/icons/EyeIcon';
 import { useNavigate } from 'react-router-dom';
+import EditIcon from '../../../components/icons/EditIcon';
 
 const FamilyListPage = () => {
     const dispatch = useDispatch();
@@ -86,25 +86,27 @@ const FamilyListPage = () => {
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Criado</th>
+                        <th>Semana de Entrega</th>
                         <th>Nome</th>
                         <th>Documento</th>
                         <th>Telefone</th>
                         <th>Quantidade Pessoas</th>
                         <th>Status</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                 {items.map((item) => (
                     <tr key={item.Id}>
-                        <td data-label='Id'><span>{item.Id}</span></td>
-                        <td data-label='Criado'><span>{putDateOnPattern(item.Created)}</span></td>
-                        <td data-label='Nome'><span>{item.Name}</span></td>
-                        <td data-label='CPF'><span>{maskCPF(item.Document)}</span></td>
-                        <td data-label='Telefone'><span>{maskPhone(item.Phone)}</span></td>
-                        <td data-label='Qt. Pessoas'><span>{item.Children + item.Adults} ({item.Children} crianças)</span></td>
-                        <td data-label='Status'><span>{item.Familystatus.Description}</span></td>
+                        <td data-label='Id'><span className='option-link' onClick={() => navigate('' + item.Id)}>{item.Id}</span></td>
+                        <td data-label='Semana'><span className='option-link' onClick={() => navigate('' + item.Id)}>{item.DeliveryWeek}</span></td>
+                        <td data-label='Nome'><span className='option-link' onClick={() => navigate('' + item.Id)}>{item.Name}</span></td>
+                        <td data-label='CPF'><span className='option-link' onClick={() => navigate('' + item.Id)}>{maskCPF(item.Document)}</span></td>
+                        <td data-label='Telefone'><span className='option-link' onClick={() => navigate('' + item.Id)}>{maskPhone(item.Phone)}</span></td>
+                        <td data-label='Qt. Pessoas'><span className='option-link' onClick={() => navigate('' + item.Id)}>{item.Children + item.Adults} ({item.Children} crianças)</span></td>
+                        <td data-label='Status'><span className='option-link' onClick={() => navigate('' + item.Id)}>{item.Familystatus.Description}</span></td>
+                        <td><span className='option-link' onClick={() => navigate('editar/' + item.Id)}><EditIcon/></span></td>
                         <td><span className='option-link' onClick={() => navigate('' + item.Id)}><EyeIcon/></span></td>
                     </tr>
                 ))}
