@@ -1,69 +1,135 @@
-/* Admin Layout */
 .admin-layout {
     display: flex;
     min-height: 100vh;
     width: 100%;
 }
-
-/* Sidebar Container */
+  
 .admin-content {
     flex: 0 0 240px; /* Fixed width for the sidebar */
-    transition: transform 0.3s ease-in-out;
 }
-
-/* Main Content */
+  
 .admin-main {
     flex: 1;
     display: flex;
     flex-direction: column;
 }
-
+  
 .admin-main > * {
     flex: 1;
     display: flex;
     flex-direction: column;
 }
-
+  
 .admin-main > .admin-header {
-    flex-shrink: 0;
+    flex-shrink: 0; /* Prevent header from shrinking */
 }
-
+  
 .admin-main > main {
-    flex-grow: 1;
+    flex-grow: 1; /* Take up the remaining space */
     padding: 24px;
 }
-
-.admin-top {
+  
+.admin-top{
     max-height: 8rem;
-    display: flex;
-    flex-direction: row;
 }
-
-/* Breadcrumb Navigation */
+  
 .href-history {
     display: flex;
     align-items: center;
     text-align: center;
     flex-wrap: wrap;
 }
-
-.href-history span {
+  
+.href-history span{
     display: flex;
     align-items: center;
     font-size: 1.5rem;
 }
-
+  
 .href-history span a {
-    text-decoration: none;
+    text-decoration: none; 
     color: black;
     cursor: pointer;
 }
-
-.link-history {
+  
+.link-history{
     color: var(--button-color-secundary) !important;
 }
+  
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+  
+.admin-table th, .admin-table td {
+    padding: 0.75rem;
+    text-align: center;
+    
+    border-bottom: 1px solid #ddd;
+}
+  
+.admin-table th {
+    font-weight: bold;
+}
+  
+.admin-table .action-icons {
+    display: flex;
+    gap: 0.5rem;
+}
+  
+.admin-button {
+    display: block;
+    padding: 0.75rem;
+    margin-top: 1rem;
+    background-color: var(--button-color-primary); 
+    color: var(--text-color-primary);
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+.admin-button:hover {
+    background-color: var(--button-color-primary-hover); 
+}
+  
+.container-admin-page {
+    margin: 1.5rem;
+    padding: 1.5rem;
+}
+  
+.container-admin-page h1{
+    color: var(--title-color);
+}
 
-/* Sidebar Toggle Button */
+.container-admin-page h1, container-admin-page-title h1 {
+    font-size: 2.5rem;
+    font-family: 'Roboto', sans-serif;;
+    margin-bottom: 1rem;
+}
+  
+.container-admin-page-title{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--double-default-spacing);
+}
+  
+.container-admin-page-border{
+    margin: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid #e0e0e0;
+}
+  
+.container-admin-page-filters, .container-admin-page-table{
+    padding: 1.5rem;
+  
+}
+  
+.container-admin-page-table{
+    margin-top: var(--double-default-spacing);
+}
+  
 .sidebar-toggle-btn {
     display: none;
     padding: 10px 15px;
@@ -71,50 +137,80 @@
     color: white;
     border: none;
     cursor: pointer;
-    font-size: 1.5rem;
-    border-radius: var(--default-border-radius);
+    font-size: 1rem;
+    z-index: 1000; /* Ensure it appears above other content */
 }
-
-/* Sidebar Overlay (Appears when sidebar is open) */
-.sidebar-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 999;
+  
+.admin-options-top {
+    display: none; /* Hide by default */
 }
-
-/* Hide sidebar by default on small screens */
-@media (max-width: 768px) {
+  
+  /* Display toggle button on mobile */
+@media (max-width: 1000px) {
     .sidebar-toggle-btn {
-        display: flex;
+      display: block;
     }
-
+    
+    .admin-options-top {
+      display: block; /* Show only on screens 768px wide or smaller */
+      position: absolute;
+      top: 10px; /* Adjust position as needed */
+      left: 10px;
+      z-index: 1000; /* Ensure it appears above other elements */
+    }
+  
     .admin-content {
-        transform: translateX(-100vh);
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        background: var(--primary-color);
-        box-shadow: 4px 0 10px var(--shadow-color-primary);
-        transition: transform 0.3s ease-in-out;
-        z-index: 1000;
+      display: none; /* Hide sidebar by default on mobile */
     }
-
+  
     .admin-content.visible {
-        transform: translateX(0);
+      display: block; /* Show sidebar when visible */
     }
-
-    .sidebar-overlay {
-        display: block;
-    }
-
-    /* Ensure main content takes full width when sidebar is hidden */
+  
+    /* Make main content full width on mobile */
     .admin-main {
-        width: 100%;
+      margin-left: 0;
+      width: 100%;
+    }
+
+    .admin-main > main {
+        flex-grow: 1; /* Take up the remaining space */
+        padding: 8px;
+    }
+
+    .container-admin-page {
+        margin: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .admin-table thead {
+        display: none; /* Hide table headers */
+    }
+
+    .admin-table tbody {
+        display: flex;
+        flex-direction: column;
+        gap: var(--double-default-spacing);
+    }
+
+    .admin-table tr {
+        display: flex;
+        flex-direction: column;
+        background: var(--color-surface);
+        padding: var(--default-spacing);
+        border-radius: var(--default-border-radius);
+        box-shadow: 0 2px 5px var(--shadow-color-primary);
+    }
+
+    .admin-table td {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+    }
+
+    .admin-table td::before {
+        content: attr(data-label); /* Show column name as a label */
+        font-weight: bold;
+        color: var(--text-color-primary);
     }
 }
