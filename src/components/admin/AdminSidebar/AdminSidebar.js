@@ -30,7 +30,7 @@ const AdminSidebar = () => {
   return (
     <aside className="sidebar">
       <div className="sidebar__logo flex-row center-component gap-default" >
-        <LogoIcon size={80}/>
+        <LogoIcon size={80} color='#FFF'/>
         <p>
           Cestas de Maria
         </p>

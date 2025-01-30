@@ -9,7 +9,7 @@
 }
 
 .login-page-description {
-    color: var(--text-color-secondary);
+    color: var(--text-color-primary);
     font-size: 14px;
     margin-bottom: var(--default-spacing);
     text-align: center;

@@ -48,6 +48,36 @@ const adminApi = {
     },
 
     /**
+     * Create a new admin.
+     * @param {Object} userId - The admin data to create.
+     * @returns {Promise<Object>} - The created admin data.
+     */
+    inativateAdmin: async (userId) => {
+        try {
+            const response = await api.post('/Admins/inactive-user/' + userId);
+            return response.data;
+        } catch (error) {
+            console.error('Error creating admin:', error);
+            throw error;
+        }
+    },
+
+    /**
+     * Create a new admin.
+     * @param {Object} userId - The admin data to create.
+     * @returns {Promise<Object>} - The created admin data.
+     */
+    ativateAdmin: async (userId) => {
+        try {
+            const response = await api.post('/Admins/active-user/' + userId);
+            return response.data;
+        } catch (error) {
+            console.error('Error creating admin:', error);
+            throw error;
+        }
+    },
+
+    /**
      * Update an existing admin.
      * @param {Object} adminData - The admin data to update.
      * @returns {Promise<Object>} - The updated admin data.

@@ -59,12 +59,12 @@ const LoginPage = () => {
         <div className="login-page-container">
             <MessageModal isOpen={isMessageOpen} click={closeMessageModal} message={message} />
             <form className="login-page-form" onSubmit={handleSubmit}>
-                <div className="div-center margin-bottom-double-default">
+                <div className="div-center margin-bottom-double-default flex-column">
                     <LogoIcon size={120}/>
+                    <h1>
+                        Cestas de Maria
+                    </h1>
                 </div>
-                <p className="login-page-description">
-                    Informe seu email e senha para acessar o painel administrativo:
-                </p>
                 <div className="login-page-form-group">
                     <label htmlFor="identifier" className="login-page-label">
                         Email
