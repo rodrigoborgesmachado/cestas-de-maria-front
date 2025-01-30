@@ -7,6 +7,7 @@ import MailMessageListPage from '../../pages/admin/MailMessageListPage/MailMessa
 import AdminsPage from '../../pages/admin/AdminsPage/AdminsPage';
 import FamilyListPage from '../../pages/admin/FamilyListPage/FamilyListPage';
 import FamilyPage from '../../pages/admin/FamilyPage/FamilyPage';
+import AddFamilyPage from '../../pages/admin/AddFamilyPage/AddFamilyPage';
 
 const AdminRoutes = () => (
   <AdminLayout>
@@ -17,6 +18,7 @@ const AdminRoutes = () => (
       <Route path="/usuarios" element={<AdminsPage />} />
       <Route path="/familias" element={<FamilyListPage />} />
       <Route path="/familias/:code" element={<FamilyPage />} />
+      <Route path="/familias/adicionar" element={<AddFamilyPage />} />
       <Route path="/*" element={<DashboardPage />} />
       </Routes>
   </AdminLayout>

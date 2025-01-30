@@ -97,6 +97,7 @@
 .container-admin-page {
     margin: 1rem;
     padding: 1rem;
+    color: var(--text-color-secundary);
 }
   
 .container-admin-page h1{

@@ -73,7 +73,10 @@ const FamilyListPage = () => {
 
     return (
     <div className="container-admin-page">
-        <h1>Lista das Famílias</h1>
+        <div className='title-with-options'>
+            <h1>Lista das Famílias</h1>
+            <button className='main-button' onClick={() => navigate('adicionar')}>Nova Família</button>
+        </div>
         <div className='container-admin-page-filters div-with-border'>
             <h3>Filtros</h3>
             <FilterComponent placeHolder={'Descrição'} showTermFilter={true} submitFilter={search} exportFunction={exportFunction}/>

@@ -355,11 +355,16 @@ body {
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--text-color-secondary);
 }
 
 .form-group input {
-    padding: 0.75rem;
+    padding: 0.5rem;
+    border: 1px solid var(--primary-color);
+    border-radius: var(--default-border-radius);
+}
+
+.form-group select {
+    padding: 0.5rem;
     border: 1px solid var(--primary-color);
     border-radius: var(--default-border-radius);
 }
@@ -380,4 +385,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: var(--default-spacing);
+}
+
+.wrap{
+    flex-wrap: wrap;
 }

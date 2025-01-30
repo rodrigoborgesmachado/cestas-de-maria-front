@@ -47,7 +47,7 @@ const FamilyPage = () => {
                         <p><strong>Adultos:</strong> {family.Adults}</p>
                         <p><strong>Crianças:</strong> {family.Children}</p>
                         <p><strong>Beneficiário de Programa Social:</strong> {family.Issocialprogrambeneficiary ? 'Sim' : 'Não'}</p>
-                        <p><strong>É da Localidade:</strong> {family.Isfromlocal ? 'Sim' : 'Não'}</p>
+                        <p><strong>É de Uberlândia:</strong> {family.Isfromlocal ? 'Sim' : 'Não'}</p>
                         <p><strong>Situação da Moradia:</strong> {family.Housingsituation}</p>
                         <p><strong>Possui Limitação Grave:</strong> {family.Hasseverelimitation ? 'Sim' : 'Não'}</p>
                         <p><strong>Bairro:</strong> {family.Neighborhood}</p>
