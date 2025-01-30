@@ -129,7 +129,7 @@ const AdminsPage = () => {
                         <th>Nome</th>
                         <th>Email</th>
                         <th>Criado</th>
-                        <th>Criado</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
