@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setLoading } from '../../../services/redux/loadingSlice';
 import { toast } from 'react-toastify';
 import { maskCPF, maskPhone } from '../../../utils/masks';
-import { getLastDayOfWeek } from '../../../utils/functions';
+import { putDateOnPattern } from '../../../utils/functions';
 
 const FamilyPage = () => {
     const { code } = useParams();
@@ -38,8 +38,6 @@ const FamilyPage = () => {
     if (family === undefined) {
         return <div className='customer-container'>Carregando...</div>;
     } else {
-        const year = new Date(family.Created).getFullYear(); // Extract year from Created date
-
         return (
             <div className="container-admin-page">
                 <div className='space-double-bottom'>
@@ -120,7 +118,7 @@ const FamilyPage = () => {
                                         <tr key={delivery.Id}>
                                             <td data-label='Id'>{delivery.Id}</td>
                                             <td data-label='Nº Semana'>{delivery.Weekofmonth}</td>
-                                            <td data-label='Data'>{getLastDayOfWeek(year, delivery.Weekofmonth)}</td>
+                                            <td data-label='Data'>{putDateOnPattern(delivery.Created)}</td>
                                             <td data-label='Status'>{delivery.Basketdeliverystatus?.Description}</td>
                                         </tr>
                                     ))}

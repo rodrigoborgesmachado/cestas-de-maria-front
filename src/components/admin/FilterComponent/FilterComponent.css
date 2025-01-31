@@ -4,6 +4,7 @@
     gap: var(--double-default-spacing);
     width: 100%;
     align-items: center; /* Ensures items align vertically if needed */
+    flex-wrap: wrap;
 }
 
 .filter-itens {
@@ -38,11 +39,19 @@
 
 .filter-basic{
     display: flex;
+    justify-content: space-between;
     gap: 2rem;
 }
 
 .filter-basic-item {
     display: flex;
     flex-direction: column;
+    min-width: 16vh;
     width: 100%;
+}
+
+@media (max-width: 1000px) {
+    .filter-basic{
+        flex-wrap: wrap;
+    }
 }

@@ -13,6 +13,7 @@ import UsersIcon from '../../icons/UsersIcon';
 import MailIcon from '../../icons/MailIcon';
 import LogoIcon from '../../icons/LogoIcon';
 import FamilyIcon from '../../icons/FamilyIcon';
+import ReportIcon from '../../icons/ReportIcon';
 
 const AdminSidebar = () => {
   const location = useLocation();
@@ -38,6 +39,7 @@ const AdminSidebar = () => {
       <nav className="sidebar__menu">
         {isAdmin && <a href="/" className={pathSegments.length === 0 || (pathSegments[0] === 'dashboard') || pathSegments[1] === 'dashboard' ? "sidebar__menu-item sidebar__menu-item-selected" : "sidebar__menu-item"}><DashBoardIcon color='white'/>Dashboard</a>}
         {isAdmin && <a href="/familias" className={pathSegments[0] === 'familias' ? "sidebar__menu-item sidebar__menu-item-selected" : "sidebar__menu-item"}><FamilyIcon color='white'/>Famílias</a>}
+        {isAdmin && <a href="/historico" className={pathSegments[0] === 'historico' ? "sidebar__menu-item sidebar__menu-item-selected" : "sidebar__menu-item"}><ReportIcon color='white'/>Histórico Doações</a>}
         {isAdmin && <a href="/usuarios" className={pathSegments[0] === 'usuarios' ? "sidebar__menu-item sidebar__menu-item-selected" : "sidebar__menu-item"}><UsersIcon color='white'/>Usuários</a>}
         {isAdmin && <a href="/emails" className={pathSegments[0] === 'emails' ? "sidebar__menu-item sidebar__menu-item-selected" : "sidebar__menu-item"}><MailIcon color='white'/>Emails Enviados</a>}
         {isAdmin && <a href="/logs" className={pathSegments[0] === 'logs' ? "sidebar__menu-item sidebar__menu-item-selected" : "sidebar__menu-item"}><LogIcon color='white'/>Logs</a>}
