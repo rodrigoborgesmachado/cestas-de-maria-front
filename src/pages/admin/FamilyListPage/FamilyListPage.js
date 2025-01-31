@@ -98,16 +98,116 @@ const FamilyListPage = () => {
                 </thead>
                 <tbody>
                 {items.map((item) => (
-                    <tr key={item.Id}>
-                        <td data-label='Id'><span className='option-link' onClick={() => navigate('' + item.Id)}>{item.Id}</span></td>
-                        <td data-label='Semana'><span className='option-link' onClick={() => navigate('' + item.Id)}>{item.DeliveryWeek}</span></td>
-                        <td data-label='Nome'><span className='option-link' onClick={() => navigate('' + item.Id)}>{item.Name}</span></td>
-                        <td data-label='CPF'><span className='option-link' onClick={() => navigate('' + item.Id)}>{maskCPF(item.Document)}</span></td>
-                        <td data-label='Telefone'><span className='option-link' onClick={() => navigate('' + item.Id)}>{maskPhone(item.Phone)}</span></td>
-                        <td data-label='Qt. Pessoas'><span className='option-link' onClick={() => navigate('' + item.Id)}>{item.Children + item.Adults} ({item.Children} crianças)</span></td>
-                        <td data-label='Status'><span className='option-link' onClick={() => navigate('' + item.Id)}>{item.Familystatus.Description}</span></td>
-                        <td><span className='option-link' onClick={() => navigate('editar/' + item.Id)}><EditIcon/></span></td>
-                        <td><span className='option-link' onClick={() => navigate('' + item.Id)}><EyeIcon/></span></td>
+                    <tr key={item.Id} 
+                        className={
+                            item.Familystatus.Id === 1 
+                            ? 'erase-info' :
+                            item.Familystatus.Id === 2
+                            ? 'waiting-info' :
+                            item.Name && item.Document && item.Phone 
+                            ? '' : 
+                            'missing-info'
+                        }
+                        >
+                        <td data-label='Id' className={
+                            item.Familystatus.Id === 1 
+                            ? 'erase-info' :
+                            item.Familystatus.Id === 2
+                            ? 'waiting-info' :
+                            item.Name && item.Document && item.Phone 
+                            ? '' : 
+                            'missing-info'
+                        }>
+                            <span className='option-link' onClick={() => navigate('' + item.Id)}>{item.Id}</span>
+                        </td>
+                        <td data-label='Semana' className={
+                            item.Familystatus.Id === 1 
+                            ? 'erase-info' :
+                            item.Familystatus.Id === 2
+                            ? 'waiting-info' :
+                            item.Name && item.Document && item.Phone 
+                            ? '' : 
+                            'missing-info'
+                        }>
+                            <span className='option-link' onClick={() => navigate('' + item.Id)}>{item.DeliveryWeek}</span>
+                        </td>
+                        <td data-label='Nome' className={
+                            item.Familystatus.Id === 1 
+                            ? 'erase-info' :
+                            item.Familystatus.Id === 2
+                            ? 'waiting-info' :
+                            item.Name && item.Document && item.Phone 
+                            ? '' : 
+                            'missing-info'
+                        }>
+                            <span className='option-link' onClick={() => navigate('' + item.Id)}>{item.Name}</span>
+                        </td>
+                        <td data-label='CPF' className={
+                            item.Familystatus.Id === 1 
+                            ? 'erase-info' :
+                            item.Familystatus.Id === 2
+                            ? 'waiting-info' :
+                            item.Name && item.Document && item.Phone 
+                            ? '' : 
+                            'missing-info'
+                        }>
+                            <span className='option-link' onClick={() => navigate('' + item.Id)}>{maskCPF(item.Document)}</span>
+                        </td>
+                        <td data-label='Telefone' className={
+                            item.Familystatus.Id === 1 
+                            ? 'erase-info' :
+                            item.Familystatus.Id === 2
+                            ? 'waiting-info' :
+                            item.Name && item.Document && item.Phone 
+                            ? '' : 
+                            'missing-info'
+                        }>
+                            <span className='option-link' onClick={() => navigate('' + item.Id)}>{maskPhone(item.Phone)}</span>
+                        </td>
+                        <td data-label='Qt. Pessoas' className={
+                            item.Familystatus.Id === 1 
+                            ? 'erase-info' :
+                            item.Familystatus.Id === 2
+                            ? 'waiting-info' :
+                            item.Name && item.Document && item.Phone 
+                            ? '' : 
+                            'missing-info'
+                        }>
+                            <span className='option-link' onClick={() => navigate('' + item.Id)}>{item.Children + item.Adults} ({item.Children} crianças)</span>
+                        </td>
+                        <td data-label='Status' className={
+                            item.Familystatus.Id === 1 
+                            ? 'erase-info' :
+                            item.Familystatus.Id === 2
+                            ? 'waiting-info' :
+                            item.Name && item.Document && item.Phone 
+                            ? '' : 
+                            'missing-info'
+                        }>
+                            <span className='option-link' onClick={() => navigate('' + item.Id)}>{item.Familystatus.Description}</span>
+                        </td>
+                        <td className={
+                            item.Familystatus.Id === 1 
+                            ? 'erase-info' :
+                            item.Familystatus.Id === 2
+                            ? 'waiting-info' :
+                            item.Name && item.Document && item.Phone 
+                            ? '' : 
+                            'missing-info'
+                        }>
+                            <span className='option-link' onClick={() => navigate('editar/' + item.Id)}><EditIcon/></span>
+                        </td>
+                        <td className={
+                            item.Familystatus.Id === 1 
+                            ? 'erase-info' :
+                            item.Familystatus.Id === 2
+                            ? 'waiting-info' :
+                            item.Name && item.Document && item.Phone 
+                            ? '' : 
+                            'missing-info'
+                        }>
+                            <span className='option-link' onClick={() => navigate('' + item.Id)}><EyeIcon/></span>
+                        </td>
                     </tr>
                 ))}
                 </tbody>

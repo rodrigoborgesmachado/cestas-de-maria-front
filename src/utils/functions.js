@@ -18,3 +18,10 @@ export const putDateOnPattern = (date) => {
   
     return `${day}/${month}/${year} às ${hours}:${minutes}`;
   };
+
+export const getLastDayOfWeek = (year, weekNumber) => {
+    const firstDayOfYear = new Date(year, 0, 1);
+    const daysOffset = (weekNumber - 1) * 7 + (firstDayOfYear.getDay() === 0 ? 0 : (8 - firstDayOfYear.getDay())); // Adjust for weeks starting on Monday
+    const lastDayOfWeek = new Date(year, 0, daysOffset + 6);
+    return lastDayOfWeek.toLocaleDateString();
+};

@@ -390,3 +390,15 @@ body {
 .wrap{
     flex-wrap: wrap;
 }
+
+.missing-info{
+    background-color: #f9ffd5;
+}
+
+.erase-info{
+    background-color: #ffdada;
+}
+
+.waiting-info{
+    background-color: #fcd6ff;
+}
