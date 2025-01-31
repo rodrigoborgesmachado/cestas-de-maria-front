@@ -82,6 +82,13 @@ const FamilyListPage = () => {
             <FilterComponent placeHolder={'Descrição'} showTermFilter={true} submitFilter={search} exportFunction={exportFunction}/>
         </div>
         <div className='container-admin-page-table div-with-border'>
+            <div className="legend-box">
+                <h3>Legenda</h3>
+                <div className="legend-item missing-info"><span></span> Família com informações faltando</div>
+                <div className="legend-item erase-info"><span></span> Status: Cortado</div>
+                <div className="legend-item waiting-info"><span></span> Status: Em espera</div>
+            </div>
+
             <table className="admin-table">
                 <thead>
                     <tr>
