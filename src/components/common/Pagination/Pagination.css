@@ -34,3 +34,9 @@ button:disabled {
     cursor: not-allowed;
     opacity: 0.5;
 }
+
+@media (max-width: 1000px) {
+    .pagination{
+        gap: 0px;
+    }
+}

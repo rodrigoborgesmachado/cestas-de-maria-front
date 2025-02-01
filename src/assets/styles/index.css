@@ -397,6 +397,11 @@ body {
     flex-wrap: wrap;
 }
 
+.normal-info{
+    background-color: var(--secundary-color) !important;
+    color: var(--text-color-primary) !important;
+}
+
 .missing-info{
     background-color: #f9ffd5 !important;
     color: var(--text-color-primary) !important;

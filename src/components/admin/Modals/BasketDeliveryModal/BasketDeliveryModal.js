@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import ConfirmModal from "../../../common/Modals/ConfirmModal/ConfirmModal";
 
 const BasketDeliveryModal = ({ 
+    isOpen,
     delivery, 
     onClose, 
     onContactMade, 
@@ -16,7 +17,7 @@ const BasketDeliveryModal = ({
 }) => {
     const [confirmModal, setConfirmModal] = useState({ isOpen: false, action: null, data: null, message: "" });
     
-    if (!delivery) return null;
+    if (!isOpen) return null;
 
     const makeCopy = async (text) => {
         const result = await copyToMemory(text);

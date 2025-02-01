@@ -1,0 +1,62 @@
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.family-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--text-color-primary);
+    cursor: pointer;
+}
+
+.family-modal-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: var(--default-spacing);
+    text-align: center;
+}
+
+.family-modal-filter {
+    margin-bottom: var(--double-default-spacing);
+}
+
+.family-modal-list {
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.family-select-button {
+    padding: var(--default-spacing);
+    background-color: var(--button-color-primary);
+    color: var(--text-color-button);
+    font-size: 14px;
+    border: none;
+    border-radius: var(--default-border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.family-select-button:hover {
+    background-color: var(--button-color-primary-hover);
+}
+
+.family-total-count {
+    display: block;
+    margin-top: var(--default-spacing);
+    font-size: 14px;
+    color: var(--text-color-secondary);
+    text-align: center;
+}
+
+.family-modal-list button{
+    color: var(--text-color-secondary) !important;
+}

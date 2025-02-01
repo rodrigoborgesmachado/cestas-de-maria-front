@@ -146,6 +146,26 @@ const basketDeliveryApi = {
             throw error;
         }
     },
+
+    /**
+     * Fetch a paginated list of basket deliveries with optional filters.
+     * @param {Object} params - Query parameters such as `page`, `quantity`, `isActive`, `term`, `orderBy`, `include`.
+     * @returns {Promise<Object>} - The paginated list of basket deliveries.
+     */
+    updatefamily: async (code, newfamily, oldfamily) => {
+        try {
+            const response = await api.post(`/BasketDeliveries/update-family/${code}/${newfamily}/${oldfamily}`, null, { // No request body
+                params: { }, // Send status as query param
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Error updating basket delivery status:', error);
+            throw error;
+        }
+    },
 };
 
 export default basketDeliveryApi;

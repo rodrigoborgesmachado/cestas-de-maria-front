@@ -8,6 +8,7 @@ import "./BasketManagementPage.css";
 import { maskCPF, maskPhone } from "../../../utils/masks";
 import BasketDeliveryModal from "../../../components/admin/Modals/BasketDeliveryModal/BasketDeliveryModal";
 import MessageModal from "../../../components/common/Modals/MessageModal/MessageModal";
+import SelectFamilyModal from "../../../components/admin/Modals/SelectFamilyModal/SelectFamilyModal";
 
 const BasketManagementPage = () => {
     const dispatch = useDispatch();
@@ -15,10 +16,12 @@ const BasketManagementPage = () => {
     const [allDeliveries, setAllDeliveries] = useState([]); // Store all deliveries from API
     const [filteredDeliveries, setFilteredDeliveries] = useState([]); // Store filtered deliveries
     const [filterText, setFilterText] = useState(""); // Filter text state
+    const [isModalDelivery, setIsModalDelivery] = useState(null); // For Modal
     const [selectedDelivery, setSelectedDelivery] = useState(null); // For Modal
     const [showLegend, setShowLegend] = useState(false); // Toggle Legenda
     const [showMessageModal, setShowMessageModal] = useState(false); // Controls the Message Modal
     const [refresh, setRefresh] = useState(false); // Controls the Message Modal
+    const [showSelectFamilyModal, setShowSelectFamilyModal] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -81,6 +84,7 @@ const BasketManagementPage = () => {
             setShowMessageModal(true); // Show message modal if date is in the past
         } else {
             setSelectedDelivery(delivery); // Open the main modal
+            setIsModalDelivery(true);
         }
     };
 
@@ -99,6 +103,27 @@ const BasketManagementPage = () => {
             toast.error("Erro ao atualizar status da entrega.");
         } finally {
             dispatch(setLoading(false));
+        }
+    };
+
+    const handleSelectFamily = async (newFamily) => {
+        if (!selectedDelivery) return;
+    
+        dispatch(setLoading(true));
+        try {
+            const response = await basketDeliveryApi.updatefamily(selectedDelivery.Id, newFamily.Id, selectedDelivery.Familyid);
+            if (response.Id) {
+                toast.success("Família atualizada com sucesso!");
+                setRefresh(prev => !prev); // Refresh the page
+                setSelectedDelivery(null);
+            } else {
+                toast.error("Erro ao atualizar a família.");
+            }
+        } catch (error) {
+            toast.error("Erro ao atualizar a família.");
+        } finally {
+            dispatch(setLoading(false));
+            setShowSelectFamilyModal(false);
         }
     };
 
@@ -179,16 +204,28 @@ const BasketManagementPage = () => {
                 />
             )}
 
+            {showSelectFamilyModal && (
+                <SelectFamilyModal
+                    isOpen={showSelectFamilyModal}
+                    onClose={() => setShowSelectFamilyModal(false)}
+                    onSelectFamily={handleSelectFamily}
+                />
+            )}
+
             {/* Render Basket Delivery Modal if valid date */}
             {selectedDelivery && (
                 <BasketDeliveryModal
+                    isOpen={isModalDelivery}
                     delivery={selectedDelivery}
                     onClose={() => setSelectedDelivery(null)}
                     onContactMade={() => updateStatus(selectedDelivery.Id, "SOLICITADO")}
                     onConfirmAttendence={() => updateStatus(selectedDelivery.Id, "SOLICITADO")}
                     onConfirmDelivery={() => updateStatus(selectedDelivery.Id, "ENTREGUE")}
                     onConfirmAbsence={() => updateStatus(selectedDelivery.Id, "FALTOU")}
-                    onChangeFamily={() => console.log("Mudar família!")}
+                    onChangeFamily={() => {
+                        setShowSelectFamilyModal(true);
+                        setIsModalDelivery(false);
+                    } }
                 />
             )}
         </div>
