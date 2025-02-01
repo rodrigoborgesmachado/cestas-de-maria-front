@@ -42,3 +42,15 @@ export const getLastDayOfWeek = (year, weekNumber) => {
     const lastDayOfWeek = new Date(year, 0, daysOffset + 6);
     return lastDayOfWeek.toLocaleDateString();
 };
+
+export const copyToMemory = async (text) => {
+  if (!text) return false;
+
+  try {
+      await navigator.clipboard.writeText(text);
+      return true;
+  } catch (err) {
+      console.error("Erro ao copiar o texto: ", err);
+      return false;
+  }
+};

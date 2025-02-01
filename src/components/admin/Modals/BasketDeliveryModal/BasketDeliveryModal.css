@@ -1,0 +1,6 @@
+.modal-confirm-delivery{
+    display: flex;
+    flex-direction: column;
+    gap: var(--triple-default-spacing);
+    margin-bottom: var(--triple-default-spacing);
+}

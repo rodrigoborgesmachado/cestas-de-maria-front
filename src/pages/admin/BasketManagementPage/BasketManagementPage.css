@@ -1,0 +1,81 @@
+.basket-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--double-default-spacing);
+}
+
+.nav-button {
+    background-color: var(--button-color-primary);
+    color: var(--text-color-button);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: var(--default-border-radius);
+}
+
+.nav-button:hover {
+    background-color: var(--button-color-primary-hover);
+}
+
+.basket-card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--triple-default-spacing);
+}
+
+.basket-card {
+    background-color: var(--color-surface);
+    border-radius: var(--default-border-radius);
+    padding: var(--double-default-spacing);
+    box-shadow: 0 2px 5px var(--shadow-color-primary);
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: var(--default-spacing);
+    cursor: pointer;
+}
+
+.basket-card:hover {
+    transform: scale(1.02);
+}
+
+.basket-card h3{
+    margin-bottom: var(--double-default-spacing);
+}
+
+.no-deliveries {
+    text-align: center;
+    font-weight: bold;
+    color: var(--text-color-primary);
+}
+
+.filter-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: var(--double-default-spacing);
+}
+
+.filter-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--primary-color);
+    border-radius: var(--default-border-radius);
+    font-size: 16px;
+}
+
+.toggle-legend-button {
+    padding: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--default-border-radius);
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+.toggle-legend-button:hover {
+    background-color: var(--primary-color-hover);
+}

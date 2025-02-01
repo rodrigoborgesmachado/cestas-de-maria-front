@@ -111,6 +111,41 @@ const basketDeliveryApi = {
             throw error;
         }
     },
+
+    /**
+     * Fetch a paginated list of basket deliveries with optional filters.
+     * @param {Object} params - Query parameters such as `page`, `quantity`, `isActive`, `term`, `orderBy`, `include`.
+     * @returns {Promise<Object>} - The paginated list of basket deliveries.
+     */
+    getByDate: async (params) => {
+        try {
+            const response = await api.get('/BasketDeliveries/GetByDate', { params });
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching paginated basket deliveries:', error);
+            throw error;
+        }
+    },
+
+    /**
+     * Fetch a paginated list of basket deliveries with optional filters.
+     * @param {Object} params - Query parameters such as `page`, `quantity`, `isActive`, `term`, `orderBy`, `include`.
+     * @returns {Promise<Object>} - The paginated list of basket deliveries.
+     */
+    updateStatus: async (code, status) => {
+        try {
+            const response = await api.post(`/BasketDeliveries/update-status/${code}`, null, { // No request body
+                params: { status }, // Send status as query param
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Error updating basket delivery status:', error);
+            throw error;
+        }
+    },
 };
 
 export default basketDeliveryApi;

@@ -148,6 +148,10 @@ body {
 .margin-top-double-default{
     margin-top: var(--double-default-spacing);
 }
+
+.margin-top-triple-default{
+    margin-top: var(--triple-default-spacing);
+}
   
 .brighten-on-hover:hover {
     filter: brightness(1.2); /* Increase brightness by 20% */
@@ -180,7 +184,7 @@ body {
 .right-component {
     display: flex;
     justify-content: flex-end;
-    width: 100%; 
+    width: 100%;
 }
 
 .center-component {
@@ -336,6 +340,8 @@ body {
     
 .modal-actions {
     display: flex;
+    flex-direction: column;
+    width: 100%;
     justify-content: space-around;
     margin-top: 8px;
     gap: 1rem;
@@ -392,13 +398,46 @@ body {
 }
 
 .missing-info{
-    background-color: #f9ffd5;
+    background-color: #f9ffd5 !important;
+    color: var(--text-color-primary) !important;
 }
 
 .erase-info{
-    background-color: #ffdada;
+    background-color: #ffdada !important;
+    color: var(--text-color-primary) !important;
 }
 
 .waiting-info{
-    background-color: #fcd6ff;
+    background-color: #fcd6ff !important;
+    color: var(--text-color-primary) !important;
+}
+
+.received-info{
+    background-color: #ecffd6 !important;
+    color: var(--text-color-primary) !important;
+}
+
+.missed-delivery-info{
+    background-color: #fdbac3 !important;
+    color: var(--text-color-primary) !important;
+}
+
+.solicited-info{
+    background-color: #cbfcfd !important;
+    color: var(--text-color-primary) !important;
+}
+
+.before-solicited-info{
+    background-color: #fdf5cb !important;
+    color: var(--text-color-primary) !important;
+}
+
+.danger {
+    background-color: var(--button-color-primary-wrong);
+    color: white;
+}
+
+.alert-text {
+    font-weight: bold;
+    margin-bottom: var(--triple-default-spacing);
 }
