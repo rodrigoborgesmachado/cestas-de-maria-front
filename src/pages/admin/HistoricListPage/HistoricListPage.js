@@ -55,7 +55,24 @@ const HistoricListPage = () => {
         try {
             dispatch(setLoading(true));
             const response = await basketApi.exportBasketDeliveries({ term: term, startDate: startDate, endDate: endDate });
-            console.log(response);
+            if (response.Status === 200 && response.Object) {
+                window.open(response.Object, "_blank");
+                toast.success('Relatório gerado com sucesso!');
+            } else {
+                toast.error('Erro ao gerar o relatório');
+            }
+        } catch (error) {
+            toast.error('Erro ao gerar o relatório');
+        }
+        finally{
+            dispatch(setLoading(false));
+        }
+    };
+
+    const exportFullReport = async () => {
+        try {
+            dispatch(setLoading(true));
+            const response = await basketApi.exportFullReport();
             if (response.Status === 200 && response.Object) {
                 window.open(response.Object, "_blank");
                 toast.success('Relatório gerado com sucesso!');
@@ -72,7 +89,10 @@ const HistoricListPage = () => {
 
     return (
     <div className="container-admin-page">
-        <h1>Histórico de Doações</h1>
+        <div className='title-with-options'>
+            <h1>Histórico de Doações</h1>
+            <button className='main-button' onClick={() => exportFullReport()}>Relatório Completo</button>
+        </div>
         <div className='container-admin-page-filters div-with-border'>
             <h3>Filtros</h3>
             <FilterComponent placeHolder={'Família'} showTermFilter={true} showEndDate={true} showStartDate={true} submitFilter={search} exportFunction={exportFunction}/>

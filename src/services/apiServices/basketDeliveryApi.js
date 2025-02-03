@@ -97,6 +97,20 @@ const basketDeliveryApi = {
     },
 
     /**
+     * Export basket deliveries based on filters.
+     * @returns {Promise<Blob>} - The exported file data.
+     */
+    exportFullReport: async () => {
+        try {
+            const response = await api.get('/BasketDeliveries/full-report');
+            return response.data;
+        } catch (error) {
+            console.error('Error exporting basket deliveries:', error);
+            throw error;
+        }
+    },
+
+    /**
      * Fetch a paginated list of basket deliveries with optional filters.
      * @param {Object} params - Query parameters such as `page`, `quantity`, `isActive`, `term`, `orderBy`, `include`.
      * @returns {Promise<Object>} - The paginated list of basket deliveries.
