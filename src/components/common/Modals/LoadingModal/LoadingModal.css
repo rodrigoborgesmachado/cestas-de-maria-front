@@ -30,6 +30,10 @@
     animation: spin 1s linear infinite;
 }
   
+.super-z-index{
+    z-index: 99999; /* Ensures it's always on top */
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }

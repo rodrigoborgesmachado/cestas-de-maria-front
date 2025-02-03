@@ -23,7 +23,7 @@ const AdminsPage = () => {
     const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
     const [refresh, setRefresh] = useState(false);
     const quantity = configService.getDefaultNumberOfItemsTable(); 
-    const orderBy = "Created:Desc";
+    const orderBy = "Id:Desc";
 
     useEffect(() => {
         const fetchUsuários = async () => {

@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import LoadingModal from './components/common/Modals/LoadingModal/LoadingModal';
 import AdminRoutes from './routes/admin/AdminRoutes';
 import LoginPage from './pages/common/LoginPage/LoginPage';
+import ConfirmUserPage from './pages/common/ConfirmUserPage/ConfirmUserPage';
 
 function App() {
   const isLoading = useSelector((state) => state.loading.isLoading);
@@ -18,7 +19,10 @@ function App() {
         <Routes>
           {
             !isAuthenticated?
-            <Route path="/" element={<LoginPage />} />
+            <>
+              <Route path="/" element={<LoginPage />} />
+              <Route path="/confirma" element={<ConfirmUserPage />} />
+            </>
             :
             <Route path="/*" element={<AdminRoutes />} />
           }

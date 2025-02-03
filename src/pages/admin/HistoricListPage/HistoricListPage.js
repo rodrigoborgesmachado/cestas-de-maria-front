@@ -8,7 +8,7 @@ import Pagination from '../../../components/common/Pagination/Pagination';
 import { toast } from 'react-toastify';
 import FilterComponent from '../../../components/admin/FilterComponent/FilterComponent';
 import { saveAs } from 'file-saver';
-import { putDateOnPattern } from '../../../utils/functions';
+import { getLastDayOfWeekByDate, putDateOnPatternOnlyDate } from '../../../utils/functions';
 
 const HistoricListPage = () => {
     const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const HistoricListPage = () => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const quantity = configService.getDefaultNumberOfItemsTable(); 
-    const orderBy = "Created:Desc";
+    const orderBy = "Id:Desc";
 
     useEffect(() => {
         const fetchHistórico = async () => {
@@ -93,7 +93,7 @@ const HistoricListPage = () => {
                 <tbody>
                 {items.map((item) => (
                     <tr key={item.Id}>
-                        <td data-label='Data'><span>{putDateOnPattern(item.Created)}</span></td>
+                        <td data-label='Data'><span>{putDateOnPatternOnlyDate(getLastDayOfWeekByDate(item.Created))}</span></td>
                         <td data-label='Família'><span>{item.Families?.Name}</span></td>
                         <td data-label='Documento'><span>{item.Families?.Document}</span></td>
                         <td data-label='Telefone'><span>{item.Families?.Phone}</span></td>

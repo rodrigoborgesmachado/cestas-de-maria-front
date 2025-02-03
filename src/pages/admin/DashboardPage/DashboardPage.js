@@ -6,13 +6,14 @@ import basketDeliveryApi from "../../../services/apiServices/basketDeliveryApi";
 import { Bar } from "react-chartjs-2";
 import "chart.js/auto";
 import "./DashboardPage.css";
-import { startOfMonth, endOfMonth, format, startOfYear, addWeeks, addDays } from "date-fns";
+import { format, startOfYear, addWeeks, addDays } from "date-fns";
+import { subDays } from "date-fns";
 
 const DashboardPage = () => {
     const dispatch = useDispatch();
     const [dashboardData, setDashboardData] = useState(null);
-    const [startDate, setStartDate] = useState(format(startOfMonth(new Date()), "yyyy-MM-dd"));
-    const [endDate, setEndDate] = useState(format(endOfMonth(new Date()), "yyyy-MM-dd"));
+    const [startDate, setStartDate] = useState(format(subDays(new Date(), 30), "yyyy-MM-dd"));
+    const [endDate, setEndDate] = useState(format(new Date(), "yyyy-MM-dd"));
 
     useEffect(() => {
         const fetchData = async () => {
@@ -102,21 +103,7 @@ const DashboardPage = () => {
     return (
         <div className="container-admin-page">
             <div className='title-with-options'>
-                <h1>DashBoard</h1>
-            </div>
-            <div className="dashboard-filter">
-                <label>Data Início:</label>
-                <input 
-                    type="date" 
-                    value={startDate} 
-                    onChange={(e) => setStartDate(e.target.value)}
-                />
-                <label>Data Fim:</label>
-                <input 
-                    type="date" 
-                    value={endDate} 
-                    onChange={(e) => setEndDate(e.target.value)}
-                />
+                <h1>Dashboard</h1>
             </div>
             <div className="dashboard-summary">
                 <div className="summary-card">Famílias em Atendimento: {dashboardData.QuantityFamilyInProgress}</div>
@@ -130,6 +117,20 @@ const DashboardPage = () => {
             </div>
             <div className="dashboard-chart">
                 <h2>Entregas por Semana</h2>
+                <div className="dashboard-filter">
+                    <label>Data Início:</label>
+                    <input 
+                        type="date" 
+                        value={startDate} 
+                        onChange={(e) => setStartDate(e.target.value)}
+                    />
+                    <label>Data Fim:</label>
+                    <input 
+                        type="date" 
+                        value={endDate} 
+                        onChange={(e) => setEndDate(e.target.value)}
+                    />
+                </div>
                 <Bar data={chartData} />
             </div>
         </div>

@@ -18,7 +18,7 @@ const LogListPage = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [totalItens, setTotalItens] = useState(0);
     const quantity = configService.getDefaultNumberOfItemsTable(); 
-    const orderBy = "Created:Desc";
+    const orderBy = "Id:Desc";
 
     useEffect(() => {
         const fetchLogs = async () => {

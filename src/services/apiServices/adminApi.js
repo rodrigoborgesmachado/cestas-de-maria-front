@@ -49,6 +49,21 @@ const adminApi = {
 
     /**
      * Create a new admin.
+     * @param {Object} adminData - The admin data to create.
+     * @returns {Promise<Object>} - The created admin data.
+     */
+    confirmUser: async (adminData) => {
+        try {
+            const response = await api.post('/Admins/confirm-user', adminData);
+            return response.data;
+        } catch (error) {
+            console.error('Error confirming admin:', error);
+            throw error;
+        }
+    },
+
+    /**
+     * Create a new admin.
      * @param {Object} userId - The admin data to create.
      * @returns {Promise<Object>} - The created admin data.
      */

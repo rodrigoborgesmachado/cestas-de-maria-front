@@ -11,7 +11,6 @@ const AddUserModal = ({ isOpen, closeModal }) => {
     
     const [name, setName] = useState("");
     const [username, setUsername] = useState("");
-    const [passwordhash, setPasswordhash] = useState("");
     const [message, setMessage] = useState("");
     const [isMessageOpen, setIsMessageOpen] = useState(false);
     const dispatch = useDispatch();
@@ -33,8 +32,7 @@ const AddUserModal = ({ isOpen, closeModal }) => {
 
         const payload = {
             name,
-            username,
-            passwordhash,
+            username
         };
 
         try {
@@ -42,6 +40,8 @@ const AddUserModal = ({ isOpen, closeModal }) => {
             const response = await adminApi.createAdmin(payload);
             var message = response.Id ? 'Usuário criado com sucesso' : 'Erro ao criar usuário. Verifique os dados e tente novamente.';
 
+            setUsername('');
+            setName('');
             setMessage(message);
             openMessageModal();
         } catch (error) {
@@ -92,18 +92,7 @@ const AddUserModal = ({ isOpen, closeModal }) => {
                                 required
                             />
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="document">Senha</label>
-                            <input
-                                type="password"
-                                id="document"
-                                className="main-input"
-                                value={passwordhash}
-                                onChange={(e) => setPasswordhash(e.target.value)}
-                                required
-                            />
-                        </div>
-                        <div className="modal-actions">
+                        <div className="modal-actions flex-row">
                             <button
                                 type="button"
                                 className="main-button"
