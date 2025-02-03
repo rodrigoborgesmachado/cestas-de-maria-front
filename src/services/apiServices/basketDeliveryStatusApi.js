@@ -88,7 +88,7 @@ const basketDeliveryStatusApi = {
         try {
             const response = await api.get('/BasketDeliveryStatus/export', {
                 params,
-                responseType: 'blob',
+                
             });
             return response.data;
         } catch (error) {

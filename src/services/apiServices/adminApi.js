@@ -133,7 +133,7 @@ const adminApi = {
         try {
             const response = await api.get('/Admins/export', {
                 params,
-                responseType: 'blob',
+                
             });
             return response.data;
         } catch (error) {

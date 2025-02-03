@@ -7,7 +7,7 @@ import configService from '../../../services/configService';
 import Pagination from '../../../components/common/Pagination/Pagination'; 
 import { toast } from 'react-toastify';
 import FilterComponent from '../../../components/admin/FilterComponent/FilterComponent';
-import { saveAs } from 'file-saver';
+
 import { maskCPF, maskPhone } from '../../../utils/masks';
 import EyeIcon from '../../../components/icons/EyeIcon';
 import { useNavigate } from 'react-router-dom';
@@ -52,13 +52,13 @@ const FamilyListPage = () => {
         setSearchTerm(term);
     }
 
-    const exportFunction = async (term) => {
+    const exportFunction = async ({term}) => {
         try {
             dispatch(setLoading(true));
-            const response = await familiesApi.exportFunction({ term: term });
+            const response = await familiesApi.exportFamilies({ term: term });
             
             if (response.Status === 200 && response.Object) {
-                saveAs(response.Object, 'reportFamílias.csv');
+                window.open(response.Object, "_blank");
                 toast.success('Relatório gerado com sucesso!');
             } else {
                 toast.error('Erro ao gerar o relatório');

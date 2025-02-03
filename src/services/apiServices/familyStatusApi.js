@@ -88,7 +88,7 @@ const familyStatusApi = {
         try {
             const response = await api.get('/FamilyStatus/export', {
                 params,
-                responseType: 'blob',
+                
             });
             return response.data;
         } catch (error) {

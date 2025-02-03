@@ -88,7 +88,7 @@ const mailMessageApi = {
         try {
             const response = await api.get('/MailMessage/export', {
                 params,
-                responseType: 'blob',
+                
             });
             return response.data;
         } catch (error) {

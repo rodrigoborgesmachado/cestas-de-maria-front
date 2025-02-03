@@ -7,7 +7,7 @@ import Pagination from '../../../components/common/Pagination/Pagination';
 import { toast } from 'react-toastify';
 import { putDateOnPattern } from '../../../utils/functions';
 import FilterComponent from '../../../components/admin/FilterComponent/FilterComponent';
-import { saveAs } from 'file-saver';
+
 import AddUserModal from '../../../components/admin/Modals/AddUserModal/AddUserModal';
 import ConfirmModal from '../../../components/common/Modals/ConfirmModal/ConfirmModal';
 
@@ -53,13 +53,13 @@ const AdminsPage = () => {
         setSearchTerm(term);
     }
 
-    const exportFunction = async (term) => {
+    const exportFunction = async ({term}) => {
         try {
             dispatch(setLoading(true));
-            const response = await adminApi.exportFunction({ term: term });
+            const response = await adminApi.exportAdmins({ term: term });
             
             if (response.Status === 200 && response.Object) {
-                saveAs(response.Object, 'reportUsuarios.csv');
+                window.open(response.Object, "_blank");
                 toast.success('Relatório gerado com sucesso!');
             } else {
                 toast.error('Erro ao gerar o relatório');

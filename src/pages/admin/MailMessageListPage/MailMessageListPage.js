@@ -68,13 +68,13 @@ const MailMessageListPage = () => {
         }
     }
 
-    const exportFunction = async (term) => {
+    const exportFunction = async ({term}) => {
         try {
             dispatch(setLoading(true));
-            const response = await mailMessageApi.exportFunction({ term: term });
+            const response = await mailMessageApi.exportMailMessages({ term: term });
             
             if (response.Status === 200 && response.Object) {
-                saveAs(response.Object, 'reportMailMessages.csv');
+                window.open(response.Object, "_blank");
                 toast.success('Relatório gerado com sucesso!');
             } else {
                 toast.error('Erro ao gerar o relatório');

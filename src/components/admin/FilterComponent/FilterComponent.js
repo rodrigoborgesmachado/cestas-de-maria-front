@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './FilterComponent.css';
 
-const FilterComponent = ({ placeHolder, showTermFilter, showStartDate=false, showEndDate=false, submitFilter=false, exportFunction }) => {
+const FilterComponent = ({ placeHolder, showTermFilter, showStartDate=false, showEndDate=false, submitFilter, exportFunction }) => {
   const [term, setTerm] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -15,7 +15,11 @@ const FilterComponent = ({ placeHolder, showTermFilter, showStartDate=false, sho
   };
 
   const exportReport = () => {
-    exportFunction(term || undefined, startDate || undefined, endDate || undefined);
+    exportFunction({
+      term: term || undefined,
+      startDate: startDate || undefined,
+      endDate: endDate || undefined
+    });
   };
 
   return (

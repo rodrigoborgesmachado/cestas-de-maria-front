@@ -8,13 +8,15 @@ import Pagination from '../../../components/common/Pagination/Pagination';
 import { toast } from 'react-toastify';
 import { putDateOnPattern } from '../../../utils/functions';
 import FilterComponent from '../../../components/admin/FilterComponent/FilterComponent';
-import { saveAs } from 'file-saver';
+
 
 const LogListPage = () => {
     const dispatch = useDispatch();
     const [items, setItems] = useState([]);
     const [page, setPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
     const [totalPages, setTotalPages] = useState(1);
     const [totalItens, setTotalItens] = useState(0);
     const quantity = configService.getDefaultNumberOfItemsTable(); 
@@ -24,7 +26,7 @@ const LogListPage = () => {
         const fetchLogs = async () => {
             dispatch(setLoading(true));
             try {
-                const response = await loggerApi.getLogsPaginated({ page, quantity, orderBy, term: searchTerm, include: "Admins" });
+                const response = await loggerApi.getLogsPaginated({ page, quantity, orderBy, term: searchTerm, startDate, endDate, include: "Admins" });
 
                 setItems(response.Results);
                 setTotalPages(response.TotalPages);
@@ -36,7 +38,7 @@ const LogListPage = () => {
             }
         };
         fetchLogs();
-    }, [page, quantity, searchTerm, dispatch]);
+    }, [page, quantity, searchTerm, startDate, endDate, dispatch]);
 
     const handlePageChange = (newPage) => {
         if (newPage > 0 && newPage <= totalPages) {
@@ -44,17 +46,19 @@ const LogListPage = () => {
         }
     };
 
-    const search = ({term} = {}) => {
+    const search = ({term, startDate, endDate} = {}) => {
         setSearchTerm(term);
+        setStartDate(startDate);
+        setEndDate(endDate);
     }
 
-    const exportFunction = async (term) => {
+    const exportFunction = async ({term}) => {
         try {
             dispatch(setLoading(true));
-            const response = await loggerApi.exportFunction({ term: term });
+            const response = await loggerApi.exportLogs({ term: term, startDate, endDate });
             
             if (response.Status === 200 && response.Object) {
-                saveAs(response.Object, 'reportLogs.csv');
+                window.open(response.Object, "_blank");
                 toast.success('Relatório gerado com sucesso!');
             } else {
                 toast.error('Erro ao gerar o relatório');
@@ -72,7 +76,7 @@ const LogListPage = () => {
         <h1>Lista dos Logs</h1>
         <div className='container-admin-page-filters div-with-border'>
             <h3>Filtros</h3>
-            <FilterComponent placeHolder={'Descrição'} showTermFilter={true} submitFilter={search} exportFunction={exportFunction}/>
+            <FilterComponent placeHolder={'Descrição'} showTermFilter={true} showStartDate={true} showEndDate={true} submitFilter={search} exportFunction={exportFunction}/>
         </div>
         <div className='container-admin-page-table div-with-border'>
             <table className="admin-table">

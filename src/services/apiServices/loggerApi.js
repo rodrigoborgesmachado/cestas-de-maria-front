@@ -60,6 +60,25 @@ const loggerApi = {
             throw error;
         }
     },
+
+    /**
+     * Export family status history records based on filters.
+     * @param {Object} params - Query parameters such as `quantityMax`, `isActive`, `term`, `orderBy`, `include`.
+     * @returns {Promise<Blob>} - The exported file data.
+     */
+    exportLogs: async (params) => {
+        try {
+            const response = await api.get('/logger/export', {
+                params,
+                
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Error exporting logs:', error);
+            throw error;
+        }
+    },
+
 };
 
 export default loggerApi;

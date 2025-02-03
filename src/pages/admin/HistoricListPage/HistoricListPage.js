@@ -7,7 +7,6 @@ import configService from '../../../services/configService';
 import Pagination from '../../../components/common/Pagination/Pagination'; 
 import { toast } from 'react-toastify';
 import FilterComponent from '../../../components/admin/FilterComponent/FilterComponent';
-import { saveAs } from 'file-saver';
 import { getLastDayOfWeekByDate, putDateOnPatternOnlyDate } from '../../../utils/functions';
 
 const HistoricListPage = () => {
@@ -52,13 +51,13 @@ const HistoricListPage = () => {
         setEndDate(endDate);
     }
 
-    const exportFunction = async (term) => {
+    const exportFunction = async ({term, startDate, endDate}) => {
         try {
             dispatch(setLoading(true));
-            const response = await basketApi.exportFunction({ term: term });
-            
+            const response = await basketApi.exportBasketDeliveries({ term: term, startDate: startDate, endDate: endDate });
+            console.log(response);
             if (response.Status === 200 && response.Object) {
-                saveAs(response.Object, 'reportHistórico.csv');
+                window.open(response.Object, "_blank");
                 toast.success('Relatório gerado com sucesso!');
             } else {
                 toast.error('Erro ao gerar o relatório');
