@@ -42,14 +42,6 @@
     color: var(--text-color-primary);
 }
 
-.container-admin-page-filters input {
-    padding: var(--small-spacing);
-    border: 1px solid var(--border-color);
-    border-radius: var(--default-border-radius);
-    background-color: var(--color-surface);
-    color: var(--text-color-primary);
-}
-
 .dashboard-filter {
     display: flex;
     align-items: center;
