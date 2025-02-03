@@ -156,6 +156,21 @@ const adminApi = {
             throw error;
         }
     },
+
+    /**
+     * Create a new admin.
+     * @param {Object} email - The admin data to create.
+     * @returns {Promise<Object>} - The created admin data.
+     */
+    recoverPass: async (email) => {
+        try {
+            const response = await api.get('/Admins/recover-pass-user?email=' + email);
+            return response.data;
+        } catch (error) {
+            console.error('Error getting password admin:', error);
+            throw error;
+        }
+    },
 };
 
 export default adminApi;

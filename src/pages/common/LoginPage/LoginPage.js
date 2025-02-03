@@ -92,6 +92,9 @@ const LoginPage = () => {
                     />
                 </div>
                 {error && <p className="login-page-error-message">{error}</p>}
+                <p className="login-page-forgot-password">
+                    <a href="/recuperar-senha">Esqueceu a senha?</a>
+                </p>
                 <button type="submit" className="login-page-submit-button">Acessar</button>
             </form>
         </div>

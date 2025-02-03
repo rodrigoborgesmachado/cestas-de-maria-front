@@ -83,3 +83,21 @@
     background-color: var(--button-color-primary-disabled);
     cursor: not-allowed;
 }
+
+.login-page-forgot-password {
+    text-align: center;
+    margin-top: var(--default-spacing);
+}
+
+.login-page-forgot-password a {
+    color: var(--text-color-accent);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+.login-page-forgot-password a:hover {
+    color: var(--text-color-primary);
+    text-decoration: underline;
+}

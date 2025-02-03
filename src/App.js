@@ -6,6 +6,7 @@ import LoadingModal from './components/common/Modals/LoadingModal/LoadingModal';
 import AdminRoutes from './routes/admin/AdminRoutes';
 import LoginPage from './pages/common/LoginPage/LoginPage';
 import ConfirmUserPage from './pages/common/ConfirmUserPage/ConfirmUserPage';
+import RecoverPasswordPage from './pages/common/RecoverPasswordPage/RecoverPasswordPage';
 
 function App() {
   const isLoading = useSelector((state) => state.loading.isLoading);
@@ -21,7 +22,9 @@ function App() {
             !isAuthenticated?
             <>
               <Route path="/" element={<LoginPage />} />
-              <Route path="/confirma" element={<ConfirmUserPage />} />
+              <Route path="/confirma" element={<ConfirmUserPage isRecover={false}/>} />
+              <Route path="/recuperar-senha" element={<RecoverPasswordPage isRecover={true}/>} />
+              <Route path="/recover" element={<ConfirmUserPage isRecover={true}/>} />
             </>
             :
             <Route path="/*" element={<AdminRoutes />} />

@@ -6,7 +6,7 @@ import adminApi from "../../../services/apiServices/adminApi";
 import { toast } from "react-toastify";
 import MessageModal from "../../../components/common/Modals/MessageModal/MessageModal";
 
-const ConfirmUserPage = () => {
+const ConfirmUserPage = ({isRecover}) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
@@ -45,7 +45,7 @@ const ConfirmUserPage = () => {
                 setMessage("O token expirou. Solicite um novo email de confirmação.");
                 setIsMessageOpen(true);
             } else {
-                toast.success("Cadastro confirmado com sucesso!");
+                toast.success(isRecover ? "Senha atualizada com sucesso!" : "Cadastro confirmado com sucesso!");
                 navigate("/"); // Redirect to login
             }
         } catch (error) {
@@ -59,10 +59,19 @@ const ConfirmUserPage = () => {
         <div className="login-page-container">
             <MessageModal isOpen={isMessageOpen} click={() => navigate("/")} message={message} />
             <form className="login-page-form" onSubmit={handleSubmit}>
-                <div className="div-center margin-bottom-double-default flex-column">
-                    <h1>Bem-vindo!</h1>
-                    <p>Por favor, defina uma senha para ativar sua conta.</p>
-                </div>
+                {
+                    isRecover ? 
+                    <div className="div-center margin-bottom-double-default flex-column">
+                        <h1>Recuperação de senha</h1>
+                        <p>Por favor, defina uma senha para acessar sua conta.</p>
+                    </div>
+                    :
+                    <div className="div-center margin-bottom-double-default flex-column">
+                        <h1>Bem-vindo!</h1>
+                        <p>Por favor, defina uma senha para ativar sua conta.</p>
+                    </div>
+
+                }
 
                 <div className="login-page-form-group">
                     <label htmlFor="password" className="login-page-label">Senha</label>
