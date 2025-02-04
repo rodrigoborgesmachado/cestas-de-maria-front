@@ -205,6 +205,7 @@
 
     .admin-table td {
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
         padding: 8px 0;
     }
