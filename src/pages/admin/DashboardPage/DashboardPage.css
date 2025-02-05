@@ -66,6 +66,10 @@
     color: var(--text-color-primary);
 }
 
+.dashboard-chart>canvas {
+    width: 100% !important;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .dashboard-summary {

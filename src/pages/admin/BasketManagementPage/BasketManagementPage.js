@@ -9,10 +9,11 @@ import { maskCPF, maskPhone } from "../../../utils/masks";
 import BasketDeliveryModal from "../../../components/admin/Modals/BasketDeliveryModal/BasketDeliveryModal";
 import MessageModal from "../../../components/common/Modals/MessageModal/MessageModal";
 import SelectFamilyModal from "../../../components/admin/Modals/SelectFamilyModal/SelectFamilyModal";
+import { getLastDayOfWeekByDate } from "../../../utils/functions";
 
 const BasketManagementPage = () => {
     const dispatch = useDispatch();
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState(getLastDayOfWeekByDate(new Date()));
     const [allDeliveries, setAllDeliveries] = useState([]); // Store all deliveries from API
     const [filteredDeliveries, setFilteredDeliveries] = useState([]); // Store filtered deliveries
     const [filterText, setFilterText] = useState(""); // Filter text state

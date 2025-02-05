@@ -63,7 +63,7 @@ export const getLastDayOfWeek = (year, weekNumber) => {
 };
 
 export const getLastDayOfWeekByDate = (date) => {
-    const lastDayOfWeek = addDays(startOfWeek(date, { weekStartsOn: 0 }), 6); // Get Sunday as last day of the week
+    const lastDayOfWeek = addDays(startOfWeek(date, { weekStartsOn: 1 }), 6); 
     return format(lastDayOfWeek, "yyyy-MM-dd"); // Format as YYYY-MM-DD
 };
 
