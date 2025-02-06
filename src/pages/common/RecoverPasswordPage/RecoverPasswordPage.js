@@ -3,9 +3,9 @@ import { useDispatch } from "react-redux";
 import { setLoading } from "../../../services/redux/loadingSlice";
 import adminApi from "../../../services/apiServices/adminApi"; 
 import MessageModal from "../../../components/common/Modals/MessageModal/MessageModal";
-import LogoIcon from "../../../components/icons/LogoIcon";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import logo from "../../../assets/images/imagem_guerreiros_de_maria.png";
 
 const RecoverPasswordPage = () => {
     const [email, setEmail] = useState("");
@@ -39,26 +39,30 @@ const RecoverPasswordPage = () => {
         <div className="login-page-container">
             <MessageModal isOpen={isMessageOpen} click={() => setIsMessageOpen(false)} message={message} />
             <form className="login-page-form" onSubmit={handleRecover}>
-                <div className="div-center margin-bottom-double-default flex-column">
-                    <LogoIcon size={120} />
-                    <h1>Cestas de Maria</h1>
+                <div className="logo-class-img">
+                    <img src={logo} alt="Logo" className="sidebar-logo" />
                 </div>
-
                 <div className="login-page-form-group">
-                    <label htmlFor="email" className="login-page-label">Digite seu e-mail</label>
-                    <input
-                        type="email"
-                        id="email"
-                        className="login-page-input"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Digite seu e-mail cadastrado"
-                        required
-                    />
-                </div>
+                    <div className="div-center margin-bottom-double-default flex-column">
+                        <h1>Cestas de Maria</h1>
+                    </div>
 
-                <button type="submit" className="login-page-submit-button">Recuperar Senha</button>
-                <button className="main-button" onClick={()=> navigate('/')}>Voltar</button>
+                    <div className="login-page-form-group">
+                        <label htmlFor="email" className="login-page-label">Digite seu e-mail</label>
+                        <input
+                            type="email"
+                            id="email"
+                            className="login-page-input"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Digite seu e-mail cadastrado"
+                            required
+                        />
+                    </div>
+
+                    <button type="submit" className="login-page-submit-button margin-bottom-double-default">Recuperar Senha</button>
+                    <button className="main-button" onClick={()=> navigate('/')}>Voltar</button>
+                </div>
             </form>
         </div>
     );

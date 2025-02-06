@@ -5,6 +5,7 @@ import { setLoading } from "../../../services/redux/loadingSlice";
 import adminApi from "../../../services/apiServices/adminApi";
 import { toast } from "react-toastify";
 import MessageModal from "../../../components/common/Modals/MessageModal/MessageModal";
+import logo from "../../../assets/images/imagem_guerreiros_de_maria.png";
 
 const ConfirmUserPage = ({isRecover}) => {
     const dispatch = useDispatch();
@@ -59,47 +60,53 @@ const ConfirmUserPage = ({isRecover}) => {
         <div className="login-page-container">
             <MessageModal isOpen={isMessageOpen} click={() => navigate("/")} message={message} />
             <form className="login-page-form" onSubmit={handleSubmit}>
-                {
-                    isRecover ? 
-                    <div className="div-center margin-bottom-double-default flex-column">
-                        <h1>Recuperação de senha</h1>
-                        <p>Por favor, defina uma senha para acessar sua conta.</p>
-                    </div>
-                    :
-                    <div className="div-center margin-bottom-double-default flex-column">
-                        <h1>Bem-vindo!</h1>
-                        <p>Por favor, defina uma senha para ativar sua conta.</p>
-                    </div>
-
-                }
-
-                <div className="login-page-form-group">
-                    <label htmlFor="password" className="login-page-label">Senha</label>
-                    <input
-                        type="password"
-                        id="password"
-                        className="login-page-input"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Digite sua senha"
-                        required
-                    />
+                <div className="logo-class-img">
+                    <img src={logo} alt="Logo" className="sidebar-logo" />
                 </div>
-
                 <div className="login-page-form-group">
-                    <label htmlFor="verifyPassword" className="login-page-label">Confirmar Senha</label>
-                    <input
-                        type="password"
-                        id="verifyPassword"
-                        className="login-page-input"
-                        value={verifyPassword}
-                        onChange={(e) => setVerifyPassword(e.target.value)}
-                        placeholder="Confirme sua senha"
-                        required
-                    />
-                </div>
 
-                <button type="submit" className="login-page-submit-button">Confirmar</button>
+                    {
+                        isRecover ? 
+                        <div className="div-center margin-bottom-double-default flex-column">
+                            <h1>Recuperação de senha</h1>
+                            <p>Por favor, defina uma senha para acessar sua conta.</p>
+                        </div>
+                        :
+                        <div className="div-center margin-bottom-double-default flex-column">
+                            <h1>Bem-vindo!</h1>
+                            <p>Por favor, defina uma senha para ativar sua conta.</p>
+                        </div>
+
+                    }
+
+                    <div className="login-page-form-group">
+                        <label htmlFor="password" className="login-page-label">Senha</label>
+                        <input
+                            type="password"
+                            id="password"
+                            className="login-page-input"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Digite sua senha"
+                            required
+                        />
+                    </div>
+
+                    <div className="login-page-form-group">
+                        <label htmlFor="verifyPassword" className="login-page-label">Confirmar Senha</label>
+                        <input
+                            type="password"
+                            id="verifyPassword"
+                            className="login-page-input"
+                            value={verifyPassword}
+                            onChange={(e) => setVerifyPassword(e.target.value)}
+                            placeholder="Confirme sua senha"
+                            required
+                        />
+                    </div>
+
+                    <button type="submit" className="login-page-submit-button">Confirmar</button>
+                </div>
             </form>
         </div>
 

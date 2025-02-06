@@ -5,7 +5,7 @@ import tokenApi from "../../../services/apiServices/tokenApi"; // Adjust the pat
 import "./LoginPage.css";
 import { setLoading } from '../../../services/redux/loadingSlice';
 import MessageModal from "../../../components/common/Modals/MessageModal/MessageModal";
-import LogoIcon from "../../../components/icons/LogoIcon";
+import logo from "../../../assets/images/imagem_guerreiros_de_maria.png";
 
 const LoginPage = () => {
     const [identifier, setIdentifier] = useState(""); // For email (admin) or CPF/CNPJ (client)
@@ -59,43 +59,47 @@ const LoginPage = () => {
         <div className="login-page-container">
             <MessageModal isOpen={isMessageOpen} click={closeMessageModal} message={message} />
             <form className="login-page-form" onSubmit={handleSubmit}>
-                <div className="div-center margin-bottom-double-default flex-column">
-                    <LogoIcon size={120}/>
-                    <h1>
-                        Cestas de Maria
-                    </h1>
+                <div className="logo-class-img">
+                    <img src={logo} alt="Logo" className="sidebar-logo" />
                 </div>
                 <div className="login-page-form-group">
-                    <label htmlFor="identifier" className="login-page-label">
-                        Email
-                    </label>
-                    <input
-                        type="email"
-                        id="identifier"
-                        className="login-page-input"
-                        value={identifier}
-                        onChange={(e) => setIdentifier(e.target.value)}
-                        placeholder="Digite seu email"
-                        required
-                    />
+                    <div className="div-center margin-bottom-double-default flex-column">
+                        <h1>
+                            Cestas de Maria
+                        </h1>
+                    </div>
+                    <div className="login-page-form-group">
+                        <label htmlFor="identifier" className="login-page-label">
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            id="identifier"
+                            className="login-page-input"
+                            value={identifier}
+                            onChange={(e) => setIdentifier(e.target.value)}
+                            placeholder="Digite seu email"
+                            required
+                        />
+                    </div>
+                    <div className="login-page-form-group">
+                        <label htmlFor="password" className="login-page-label">Senha</label>
+                        <input
+                            type="password"
+                            id="password"
+                            className="login-page-input"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Digite sua senha"
+                            required
+                        />
+                    </div>
+                    {error && <p className="login-page-error-message">{error}</p>}
+                    <p className="login-page-forgot-password">
+                        <a href="/recuperar-senha">Esqueceu a senha?</a>
+                    </p>
+                    <button type="submit" className="login-page-submit-button">Acessar</button>
                 </div>
-                <div className="login-page-form-group">
-                    <label htmlFor="password" className="login-page-label">Senha</label>
-                    <input
-                        type="password"
-                        id="password"
-                        className="login-page-input"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Digite sua senha"
-                        required
-                    />
-                </div>
-                {error && <p className="login-page-error-message">{error}</p>}
-                <p className="login-page-forgot-password">
-                    <a href="/recuperar-senha">Esqueceu a senha?</a>
-                </p>
-                <button type="submit" className="login-page-submit-button">Acessar</button>
             </form>
         </div>
     );

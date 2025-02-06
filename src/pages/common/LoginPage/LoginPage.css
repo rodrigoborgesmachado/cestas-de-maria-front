@@ -21,15 +21,18 @@
     border-radius: var(--default-border-radius-extra);
     box-shadow: 0 4px 10px var(--shadow-color-primary);
     width: 100%;
-    max-width: 400px;
+    max-width: 600px;
     display: flex;
-    flex-direction: column;
-    gap: var(--default-spacing);
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: var(--double-default-spacing);
 }
 
 .login-page-form-group {
     display: flex;
     flex-direction: column;
+    justify-self: center;
     width: 100%;
 }
 
@@ -100,4 +103,22 @@
 .login-page-forgot-password a:hover {
     color: var(--text-color-primary);
     text-decoration: underline;
+}
+
+.logo-class-img img{
+    width: 16rem;
+    height: 24rem;
+}
+
+@media (max-width: 1000px) {
+    .login-page-form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--double-default-spacing);
+    }
+
+    .logo-class-img img{
+        width: 20rem;
+        height: 28rem;
+    }
 }
