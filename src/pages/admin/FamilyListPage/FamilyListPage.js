@@ -60,10 +60,16 @@ const FamilyListPage = () => {
         setFamilyStatusId(familyStatusId);
     }
 
-    const exportFunction = async ({term}) => {
+    const exportFunction = async ({term, familyStatusId}) => {
         try {
             dispatch(setLoading(true));
-            const response = await familiesApi.exportFamilies({ term: term });
+
+            var status = familyStatusId === "1" ? "CORTADO" :
+                             familyStatusId === "2" ? "EMESPERA" :
+                             familyStatusId === "3" ? "EMATENDIMENTO" :
+                             familyStatusId === "4" ? "ELEGIVEL" : "";
+
+            const response = await familiesApi.exportFamilies({ orderBy, status, term: term, include: "Familystatus" });
             
             if (response.Status === 200 && response.Object) {
                 window.open(response.Object, "_blank");

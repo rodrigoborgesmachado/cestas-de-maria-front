@@ -60,7 +60,8 @@ const FilterComponent = ({ placeHolder, showTermFilter, showStartDate=false, sho
     exportFunction({
       term: term || undefined,
       startDate: startDate || undefined,
-      endDate: endDate || undefined
+      endDate: endDate || undefined,
+      familyStatusId: filter.familyStatusId || undefined,
     });
   };
 
