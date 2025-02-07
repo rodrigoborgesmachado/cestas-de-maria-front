@@ -19,6 +19,7 @@ const FamilyListPage = () => {
     const [items, setItems] = useState([]);
     const [page, setPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState('');
+    const [familyStatusId, setFamilyStatusId] = useState('');
     const [totalPages, setTotalPages] = useState(1);
     const [totalItens, setTotalItens] = useState(0);
     const quantity = configService.getDefaultNumberOfItemsTable(); 
@@ -28,7 +29,13 @@ const FamilyListPage = () => {
         const fetchFamílias = async () => {
             dispatch(setLoading(true));
             try {
-                const response = await familiesApi.getFamiliesPaginated({ page, quantity, orderBy, term: searchTerm, include: "Familystatus" });
+                
+                var status = familyStatusId === "1" ? "CORTADO" :
+                             familyStatusId === "2" ? "EMESPERA" :
+                             familyStatusId === "3" ? "EMATENDIMENTO" :
+                             familyStatusId === "4" ? "ELEGIVEL" : "";
+
+                const response = await familiesApi.getFamiliesPaginated({ page, quantity, orderBy, status, term: searchTerm, include: "Familystatus" });
 
                 setItems(response.Results);
                 setTotalPages(response.TotalPages);
@@ -40,7 +47,7 @@ const FamilyListPage = () => {
             }
         };
         fetchFamílias();
-    }, [page, quantity, searchTerm, dispatch]);
+    }, [page, quantity, searchTerm, familyStatusId, dispatch]);
 
     const handlePageChange = (newPage) => {
         if (newPage > 0 && newPage <= totalPages) {
@@ -48,8 +55,9 @@ const FamilyListPage = () => {
         }
     };
 
-    const search = ({term} = {}) => {
+    const search = ({term, familyStatusId} = {}) => {
         setSearchTerm(term);
+        setFamilyStatusId(familyStatusId);
     }
 
     const exportFunction = async ({term}) => {
@@ -79,7 +87,7 @@ const FamilyListPage = () => {
         </div>
         <div className='container-admin-page-filters div-with-border'>
             <h3>Filtros</h3>
-            <FilterComponent placeHolder={'Descrição'} showTermFilter={true} submitFilter={search} exportFunction={exportFunction}/>
+            <FilterComponent placeHolder={'Descrição'} showTermFilter={true} showFamilyStatus={true} submitFilter={search} exportFunction={exportFunction}/>
         </div>
         <div className='container-admin-page-table div-with-border'>
             <div className="legend-box">

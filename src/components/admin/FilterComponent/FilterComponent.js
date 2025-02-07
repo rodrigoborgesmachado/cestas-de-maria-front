@@ -1,18 +1,60 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import familyStatusApi from '../../../services/apiServices/familyStatusApi';
 import './FilterComponent.css';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { setLoading } from '../../../services/redux/loadingSlice';
 
-const FilterComponent = ({ placeHolder, showTermFilter, showStartDate=false, showEndDate=false, submitFilter, exportFunction }) => {
+const FilterComponent = ({ placeHolder, showTermFilter, showStartDate=false, showEndDate=false, showFamilyStatus=false, submitFilter, exportFunction }) => {
+  const dispatch = useDispatch();
   const [term, setTerm] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  
+  const [familyStatusList, setFamilyStatusList] = useState([]);
+  const [showMoreFilter, setShowMoreFilter] = useState(false);
+  const [filter, setFilter] = useState({
+    familyStatusId: ''
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFilter((prevState) => ({
+        ...prevState,
+        [name]: value,
+    }));
+  };
+
   const handleSubmit = () => {
     submitFilter({
       term: term || undefined,
       startDate: startDate || undefined,
-      endDate: endDate || undefined
+      endDate: endDate || undefined,
+      familyStatusId: filter.familyStatusId || undefined,
     });
   };
+
+  useEffect(() => {
+    const fetchFamilyStatus = async () => {
+        try {
+            const response = await familyStatusApi.getAllFamilyStatuses();
+            setFamilyStatusList(response);
+        } catch (error) {
+            toast.error('Erro ao carregar as marcas!');
+        }
+    };
+
+    const fetchData = async () => {
+        try {
+            dispatch(setLoading(true));
+            if(showFamilyStatus)
+              await fetchFamilyStatus();
+        } finally {
+            dispatch(setLoading(false));
+        }
+    };
+
+    fetchData();
+  }, [showFamilyStatus, dispatch]);
 
   const exportReport = () => {
     exportFunction({
@@ -77,8 +119,51 @@ const FilterComponent = ({ placeHolder, showTermFilter, showStartDate=false, sho
               </button>
             )
           }
+
+          {
+            showFamilyStatus ? 
+              <button onClick={() => setShowMoreFilter(prev => !prev)} className="main-button margin-top-default">
+                {
+                  showMoreFilter ? 
+                  'Menos Filtros'
+                  :
+                  'Mais Filtros'
+                }
+              </button>
+              : 
+              <></>
+          }
         </div>
       </div>
+
+      {
+        showMoreFilter &&
+        <div className='filters-more'>
+          {
+            showFamilyStatus && 
+            <div className="filters-more-item">
+                <label>
+                    Status:
+                </label>
+
+                <select
+                    name="familyStatusId"
+                    className="main-input"
+                    value={filter.ModelCode}
+                    onChange={handleInputChange}
+                    required
+                >
+                    <option value="">Selecione o Status</option>
+                    {familyStatusList.map((obj) => (
+                        <option key={obj.Id} value={obj.Id}>
+                            {obj.Description}
+                        </option>
+                    ))}
+                </select>
+            </div>
+          }
+        </div>
+      }
     </div>
   );
 };
