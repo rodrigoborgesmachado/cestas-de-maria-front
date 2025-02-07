@@ -45,6 +45,7 @@
 .dashboard-filter {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: var(--double-default-spacing);
     padding: var(--double-default-spacing);
     background-color: var(--color-surface);
@@ -64,6 +65,7 @@
     border-radius: var(--default-border-radius);
     background-color: var(--color-surface);
     color: var(--text-color-primary);
+    box-shadow: 0 2px 5px var(--shadow-color-primary);
 }
 
 .dashboard-chart>canvas {
