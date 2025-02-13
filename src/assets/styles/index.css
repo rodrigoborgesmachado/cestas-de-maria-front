@@ -1,46 +1,46 @@
 :root {
     /* Background Colors */
-    --background-color: #FAFAFA; /* Soft white for a clean, modern feel */
-    --desktop-background-color: #ECEFF1; /* Subtle gray for large screens */
+    --background-color: #FAFAFA; 
+    --desktop-background-color: #ECEFF1; 
 
     /* Primary Theme Colors */
-    --primary-color: #1B4332; /* Deep professional green */
+    --primary-color: #1B4332; 
     --primary-color-hover: #142E24;
-    --modal-primary-color: rgba(27, 67, 50, 0.9); /* Matching deep green with opacity */
+    --modal-primary-color: rgba(27, 67, 50, 0.9); 
 
     /* Panel Colors */
-    --secundary-color: #D8E2DC; /* Muted pastel green for contrast */
-    --secundary-color-hover: #B7C9B8; /* Darker shade on hover */
+    --secundary-color: #D8E2DC; 
+    --secundary-color-hover: #B7C9B8; 
 
     /* Primary Button Colors */
-    --button-color-primary: #1B4332; /* Deep green for primary buttons */
-    --button-color-primary-hover: #0F2C20; /* Slightly darker for a sleek hover effect */
-    --button-color-primary-disabled: #9BB2A5; /* Muted green to indicate disabled state */
-    --button-color-primary-right: #2D6A4F; /* Modern success green */
+    --button-color-primary: #1B4332; 
+    --button-color-primary-hover: #0F2C20; 
+    --button-color-primary-disabled: #9BB2A5; 
+    --button-color-primary-right: #2D6A4F; 
     --button-color-primary-right-hover: #1F5237;
-    --button-color-primary-wrong: #D62828; /* Strong red for errors */
+    --button-color-primary-wrong: #D62828; 
     --button-color-primary-wrong-hover: #A61616;
     
     /* Secondary Button Colors */
-    --button-color-secundary: #3D5A80; /* Muted blue-green */
+    --button-color-secundary: #3D5A80; 
     --button-color-secundary-hover: #293F50;
-    --button-color-secundary-wrong: #8D0801; /* Darker warning red */
+    --button-color-secundary-wrong: #8D0801; 
     --button-color-secundary-wrong-hover: #5E0600;
 
     /* Text Colors */
-    --title-color: #102A43; /* Elegant dark blue-gray */
-    --text-color-primary: #2C3E50; /* Deep professional gray for readability */
+    --title-color: #102A43; 
+    --text-color-primary: #2C3E50; 
     --text-color-primary-light: #52616B;
     --text-color-primary-dark: #1A2A33;
-    --text-color-secondary: #FFFFFF; /* Subtle gray for less important text */
-    --text-color-accent: #1B98E0; /* Bright blue for contrast */
+    --text-color-secondary: #FFFFFF; 
+    --text-color-accent: #1B98E0; 
     --text-color-code: #1B4332;
-    --text-color-button: #FFFFFF; /* Always white for readability on buttons */
+    --text-color-button: #FFFFFF; 
 
     /* Borders, Shadows, and Separators */
     --separator-color-primary: rgba(0, 0, 0, 0.12);
     --separator-marker-color-primary: #1B4332;
-    --panel-border-color: #D1D5DB; /* Neutral border for panels */
+    --panel-border-color: #D1D5DB; 
     --shadow-color-primary: rgba(0, 0, 0, 0.15);
     --shadow-color-secondary: rgba(0, 0, 0, 0.1);
 
@@ -48,7 +48,7 @@
     --block-color: #FFFFFF;
     --block-color-secundary: #EDF2F7;
     --color-surface: #FFFFFF;
-    --color-surface-variant: #E3F2FD; /* Light blue tint for soft contrast */
+    --color-surface-variant: #E3F2FD; 
 
     /* Loader and Modal Colors */
     --loader-color: #1B4332;
