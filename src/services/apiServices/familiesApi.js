@@ -33,6 +33,38 @@ const familiesApi = {
     },
 
     /**
+     * Fetch a family by its document.
+     * @param {string} document - The family's unique document.
+     * @param {Object} params - Query parameters such as `include`.
+     * @returns {Promise<Object>} - The family data.
+     */
+    getFamilyByDocument: async (document, params = {}) => {
+        try {
+            const response = await api.get(`/Families/getbydocument/${document}`, { params });
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching family by document:', error);
+            throw error;
+        }
+    },
+
+    /**
+     * Fetch a family by its phone.
+     * @param {string} phone - The family's unique phone.
+     * @param {Object} params - Query parameters such as `include`.
+     * @returns {Promise<Object>} - The family data.
+     */
+    getFamilyByPhone: async (phone, params = {}) => {
+        try {
+            const response = await api.get(`/Families/getbyphone/${phone}`, { params });
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching family by phone:', error);
+            throw error;
+        }
+    },
+
+    /**
      * Create a new family.
      * @param {Object} familyData - The family data to create.
      * @returns {Promise<Object>} - The created family data.

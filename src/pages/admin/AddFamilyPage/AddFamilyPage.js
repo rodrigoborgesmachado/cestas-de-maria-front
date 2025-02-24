@@ -12,6 +12,8 @@ const AddFamilyPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [status, setStatus] = useState([]);
+    const [documentExists, setDocumentExists] = useState('');
+    const [phoneExists, setPhoneExists] = useState('');
     const { code } = useParams();
     const [formData, setFormData] = useState({
         name: "",
@@ -71,7 +73,6 @@ const AddFamilyPage = () => {
                 dispatch(setLoading(false));
             }
         }
-
         
         fetchStatus();
 
@@ -112,6 +113,42 @@ const AddFamilyPage = () => {
         }
     };
 
+    const getFamilyByDocument =  async (document) => {
+        dispatch(setLoading(true));
+        try {
+            const response = await familiesApi.getFamilyByDocument(document);
+            
+            if(response){
+                setDocumentExists('Documento já cadastrado!');
+            }
+            else{
+                setDocumentExists('');
+            }
+        } catch (error) {
+            toast.error('Erro ao verificar se documento já existe.');
+        } finally {
+            dispatch(setLoading(false));
+        }
+    }
+
+    const getFamilyByPhone =  async (phone) => {
+        dispatch(setLoading(true));
+        try {
+            const response = await familiesApi.getFamilyByPhone(phone);
+            
+            if(response){
+                setPhoneExists('Telefone já cadastrado!');
+            }
+            else{
+                setPhoneExists('');
+            }
+        } catch (error) {
+            toast.error('Erro ao verificar se telefone já existe.');
+        } finally {
+            dispatch(setLoading(false));
+        }
+    }
+
     return (
         <div className="container-admin-page">
             <h1>Adicionar Família</h1>
@@ -130,12 +167,20 @@ const AddFamilyPage = () => {
 
                     <div className="form-group">
                         <label>Telefone:</label>
-                        <input type="text" name="phone" value={maskPhone(formData.phone)} onChange={handleChange} required />
+                        <input type="text" name="phone" value={maskPhone(formData.phone)} onChange={handleChange} required onBlur={() => getFamilyByPhone(formData.document)}/>
+                        {
+                            phoneExists && 
+                            <label className="danger">{phoneExists}</label>
+                        }
                     </div>
 
                     <div className="form-group">
                         <label>Documento:</label>
-                        <input type="text" name="document" value={maskCPF(formData.document)} onChange={handleChange} required />
+                        <input type="text" name="document" value={maskCPF(formData.document)} onChange={handleChange} required onBlur={() => getFamilyByDocument(formData.document)} />
+                        {
+                            documentExists && 
+                            <label className="danger">{documentExists}</label>
+                        }
                     </div>
                 </div>
 
