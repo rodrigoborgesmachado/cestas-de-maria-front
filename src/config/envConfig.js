@@ -5,7 +5,7 @@ const EnvConfig = {
       API_URL: ConfigService.getApiUrl(),
     },
     PRODUCTION: {
-      API_URL: "https://apiportalwebalbus-hadjdhbdc3dxd4em.brazilsouth-01.azurewebsites.net",
+      API_URL: "https://cestas-de-maria.azurewebsites.net",
     }
 };
   
