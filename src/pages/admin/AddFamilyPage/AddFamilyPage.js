@@ -37,7 +37,7 @@ const AddFamilyPage = () => {
                 const response = await familyStatusApi.getAllFamilyStatuses();
                 setStatus(response);
             } catch (error) {
-                toast.error('Erro ao carregar as marcas!');
+                toast.error('Erro ao carregar os status!');
             }
             finally{
                 dispatch(setLoading(false));
@@ -91,21 +91,22 @@ const AddFamilyPage = () => {
         dispatch(setLoading(true));
 
         try {
-            if(!code)
-            {
-                await familiesApi.createFamily(formData);
-                toast.success("Família adicionada com sucesso!");
+            var result = !code ? await familiesApi.createFamily(formData) : await familiesApi.updateFamily(code, formData);
+
+            if(result.code === 401){
+                toast.warn(result.message);
+            }
+            else{
+                toast.success(!code ? "Família adicionada com sucesso!" : "Família editada com sucesso!");
                 navigate("/familias"); 
             }
-            else
-            {
-                await familiesApi.updateFamily(code, formData);
-                toast.success("Família editada com sucesso!");
-                navigate("/familias/" + code); 
-            }
-            
         } catch (error) {
-            toast.error("Erro ao adicionar família. Verifique os dados e tente novamente.");
+            if(error.response.data && error.response.data.Code === 401){
+                toast.warn(error.response.data.Message);
+            }
+            else{
+                toast.error("Erro ao adicionar família. Verifique os dados e tente novamente.");
+            }
         } finally {
             dispatch(setLoading(false));
         }

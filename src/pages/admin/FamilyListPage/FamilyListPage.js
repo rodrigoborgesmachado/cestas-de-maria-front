@@ -93,7 +93,7 @@ const FamilyListPage = () => {
         </div>
         <div className='container-admin-page-filters div-with-border'>
             <h3>Filtros</h3>
-            <FilterComponent placeHolder={'Descrição'} showTermFilter={true} showFamilyStatus={true} submitFilter={search} exportFunction={exportFunction}/>
+            <FilterComponent placeHolder={'Nome | Documento | Telefone'} showTermFilter={true} showFamilyStatus={true} submitFilter={search} exportFunction={exportFunction}/>
         </div>
         <div className='container-admin-page-table div-with-border'>
             <div className="legend-box">
