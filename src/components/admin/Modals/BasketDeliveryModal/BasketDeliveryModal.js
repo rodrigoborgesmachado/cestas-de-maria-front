@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import "./BasketDeliveryModal.css";
 import { maskPhone } from "../../../../utils/masks";
-import { copyToMemory } from "../../../../utils/functions";
-import { toast } from "react-toastify";
 import ConfirmModal from "../../../common/Modals/ConfirmModal/ConfirmModal";
 
 const BasketDeliveryModal = ({ 
@@ -18,14 +16,6 @@ const BasketDeliveryModal = ({
     const [confirmModal, setConfirmModal] = useState({ isOpen: false, action: null, data: null, message: "" });
     
     if (!isOpen) return null;
-
-    const makeCopy = async (text) => {
-        const result = await copyToMemory(text);
-        if(result)
-            toast.success("Número copiado!");
-        else
-            toast.error("Erro ao copiar número!");
-    };
 
     const handleConfirmAction = (action, message, data = null) => {
         setConfirmModal({
@@ -94,7 +84,7 @@ const BasketDeliveryModal = ({
                                             Deve ser feito contato com a família com o seguinte telefone: 
                                             <strong 
                                                 className="option-link" 
-                                                onClick={() => makeCopy(maskPhone(delivery.Families.Phone))}
+                                                onClick={() => window.open(`https://wa.me/${delivery.Families.Phone.replace(/\D/g, '')}`, '_blank')}
                                             >
                                                 {maskPhone(delivery.Families.Phone)}
                                             </strong>
