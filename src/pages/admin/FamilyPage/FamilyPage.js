@@ -86,7 +86,7 @@ const FamilyPage = () => {
                         </div>
                     </div>
 
-                    {historyStatus.length > 0 && (
+                    {historyStatus && historyStatus.length > 0 && (
                         <div className="box margin-bottom-double-default">
                             <div className='margin-bottom-double-default'>
                                 <h2>Histórico de Status</h2>
@@ -99,7 +99,7 @@ const FamilyPage = () => {
                         </div>
                     )}
 
-                    {basketDeliveries.length > 0 && (
+                    {basketDeliveries && basketDeliveries.length > 0 && (
                         <div className="box margin-bottom-double-default">
                             <div className='margin-bottom-double-default'>
                                 <h2>Histórico de Entregas</h2>
