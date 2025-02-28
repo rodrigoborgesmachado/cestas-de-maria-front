@@ -24,7 +24,8 @@ const FamilyPage = () => {
                 });
                 setFamily(response);
                 setHistoryStatus(response.Familyfamilystatushistory);
-                setBasketDeliveries(response.Basketdeliveries);
+                const sortedDeliveries = [...response.Basketdeliveries].sort((a, b) => b.Id - a.Id);
+                setBasketDeliveries(sortedDeliveries);
             } catch (error) {
                 toast.error('Erro ao buscar os dados da família.');
             } finally {
