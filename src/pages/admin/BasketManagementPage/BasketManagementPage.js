@@ -128,6 +128,31 @@ const BasketManagementPage = () => {
         }
     };
 
+    const hasBeforeSolicitadoStatus = () => {
+        return filteredDeliveries.some(delivery => delivery.Basketdeliverystatus.Id === 1);
+    };
+
+    const updateAllToSolicitados = async () => {
+        if (filteredDeliveries.length === 0) {
+            toast.warn("Nenhuma entrega encontrada.");
+            return;
+        }
+    
+        dispatch(setLoading(true));
+        try {
+            for (const delivery of filteredDeliveries) {
+                if(delivery.Basketdeliverystatus.Id === 1)
+                    await basketDeliveryApi.updateStatus(delivery.Id, "SOLICITADO");
+            }
+            toast.success("Todas as famílias foram atualizadas como 'Solicitadas'!");
+            setRefresh(prev => !prev); // Refresh to update data
+        } catch (error) {
+            toast.error("Erro ao atualizar as famílias.");
+        } finally {
+            dispatch(setLoading(false));
+        }
+    };
+
     return (
         <div className="container-admin-page">
             <div className="basket-navigation">
@@ -147,6 +172,18 @@ const BasketManagementPage = () => {
                 />
             </div>
 
+            {
+                hasBeforeSolicitadoStatus() && 
+                <div className="div-center margin-bottom-default">
+                    <button 
+                        className="main-button margin-top-double-default"
+                        onClick={updateAllToSolicitados}
+                    >
+                        Atualizar todas famílias como Solicitados
+                    </button>
+                </div>
+            }
+            
             <div className="basket-card-container">
                 {filteredDeliveries.length > 0 ? (
                     filteredDeliveries.map((delivery, index) => (
