@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { setLoading } from "../../../services/redux/loadingSlice";
 import { toast } from "react-toastify";
 import basketDeliveryApi from "../../../services/apiServices/basketDeliveryApi";
+import familiesApi from "../../../services/apiServices/familiesApi";
 import { format, addDays, subDays, isBefore, startOfDay } from "date-fns";
 import "./BasketManagementPage.css";
 import { maskCPF, maskPhone } from "../../../utils/masks";
@@ -10,6 +11,7 @@ import BasketDeliveryModal from "../../../components/admin/Modals/BasketDelivery
 import MessageModal from "../../../components/common/Modals/MessageModal/MessageModal";
 import SelectFamilyModal from "../../../components/admin/Modals/SelectFamilyModal/SelectFamilyModal";
 import { getLastDayOfWeekByDate } from "../../../utils/functions";
+import ConfirmModal from "../../../components/common/Modals/ConfirmModal/ConfirmModal";
 
 const BasketManagementPage = () => {
     const dispatch = useDispatch();
@@ -19,10 +21,21 @@ const BasketManagementPage = () => {
     const [filterText, setFilterText] = useState(""); // Filter text state
     const [isModalDelivery, setIsModalDelivery] = useState(null); // For Modal
     const [selectedDelivery, setSelectedDelivery] = useState(null); // For Modal
+    const [selectedFamily, setSelectedFamily] = useState(null); // For Modal
     const [showLegend, setShowLegend] = useState(false); // Toggle Legenda
     const [showMessageModal, setShowMessageModal] = useState(false); // Controls the Message Modal
     const [refresh, setRefresh] = useState(false); // Controls the Message Modal
     const [showSelectFamilyModal, setShowSelectFamilyModal] = useState(false);
+    const [updateStatusModal, setUpdateStatusModal] = useState(false);
+
+    const openUpdateFamilyStatus = () => {
+        setIsModalDelivery(false);
+        setUpdateStatusModal(true);
+    }
+
+    const closeUpdateFamilyStatus = () => {
+        setUpdateStatusModal(false);
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -95,6 +108,21 @@ const BasketManagementPage = () => {
             const response = await basketDeliveryApi.updateStatus(id, status);
             if (response.Id) {
                 toast.success("Status atualizado com sucesso!");
+
+                if (status === "FALTOU") {
+                    const history = await basketDeliveryApi.getBasketDeliveryHistoryByFamily(response.Familyid);
+                    setSelectedFamily(response.Familyid);
+                
+                    if (history.length > 0) {
+                        history.sort((a, b) => new Date(b.Created) - new Date(a.Created));
+                
+                        if (history[0].Deliverystatusid === 4) {
+                            openUpdateFamilyStatus();
+                            return; 
+                        }
+                    }
+                }
+                
                 setRefresh(prev => !prev);
                 setSelectedDelivery(null);
             } else {
@@ -153,8 +181,38 @@ const BasketManagementPage = () => {
         }
     };
 
+    const updateFamilyStatus = async (id, status) => {
+        dispatch(setLoading(true));
+        try {
+            const response = await familiesApi.updateStatus(id, status);
+            if (response.Id) {
+                toast.success("Família colocada como cortada com sucesso!");
+
+                closeUpdateFamilyStatus();
+                setRefresh(prev => !prev);
+                setSelectedDelivery(null);
+                setSelectedFamily(null);
+            } else {
+                toast.error(response);
+            }
+        } catch (error) {
+            toast.error("Erro ao atualizar família.");
+        } finally {
+            dispatch(setLoading(false));
+        }
+    };
+
     return (
         <div className="container-admin-page">
+            <ConfirmModal isOpen={updateStatusModal} 
+                title="Confirmação"
+                message={'Essa família também faltou na última entrega, gostaria de coloca-la como cortada?'}
+                onYes={() => updateFamilyStatus(selectedFamily, 'CORTADO')}
+                onNo={() => {
+                    closeUpdateFamilyStatus();
+                    setRefresh(prev => !prev);
+                }} />
+
             <div className="basket-navigation">
                 <button className="nav-button" onClick={() => setDate(getPreviousSaturday(date))}>← Anterior</button>
                 <h2>{format(date, "dd/MM/yyyy")}</h2>

@@ -194,6 +194,22 @@ const basketDeliveryApi = {
             throw error;
         }
     },
+
+    /**
+     * Fetch a basket delivery by its code.
+     * @param {string} code - The basket delivery's unique code.
+     * @param {Object} params - Query parameters such as `include`.
+     * @returns {Promise<Object>} - The basket delivery data.
+     */
+    getBasketDeliveryHistoryByFamily: async (code, params = {}) => {
+        try {
+            const response = await api.get(`/BasketDeliveries/gethistorybyfamily/${code}`, { params });
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching basket delivery by family:', error);
+            throw error;
+        }
+    }
 };
 
 export default basketDeliveryApi;
