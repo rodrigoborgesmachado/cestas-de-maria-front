@@ -23,8 +23,9 @@ const FamilyPage = () => {
                     include: 'Familystatus,Familyfamilystatushistory.NewFamilystatus,Familyfamilystatushistory.OldFamilystatus,Admins,Basketdeliveries,Basketdeliveries.Basketdeliverystatus'
                 });
                 setFamily(response);
-                setHistoryStatus(response.Familyfamilystatushistory);
+                const sortedHistory = [...response.Familyfamilystatushistory].sort((a, b) => b.Id - a.Id);
                 const sortedDeliveries = [...response.Basketdeliveries].sort((a, b) => b.Id - a.Id);
+                setHistoryStatus(sortedHistory);
                 setBasketDeliveries(sortedDeliveries);
             } catch (error) {
                 toast.error('Erro ao buscar os dados da família.');
