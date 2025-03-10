@@ -4,7 +4,7 @@ import { setLoading } from "../../../services/redux/loadingSlice";
 import { toast } from "react-toastify";
 import basketDeliveryApi from "../../../services/apiServices/basketDeliveryApi";
 import familiesApi from "../../../services/apiServices/familiesApi";
-import { format, addDays, subDays, isBefore, startOfDay } from "date-fns";
+import { format, addDays, subDays } from "date-fns";
 import "./BasketManagementPage.css";
 import { maskCPF, maskPhone } from "../../../utils/masks";
 import BasketDeliveryModal from "../../../components/admin/Modals/BasketDeliveryModal/BasketDeliveryModal";
@@ -89,9 +89,6 @@ const BasketManagementPage = () => {
 
     // Handle card click
     const handleCardClick = (delivery) => {
-        const today = startOfDay(new Date());
-        const selectedDate = startOfDay(date);
-
         setSelectedDelivery(delivery); // Open the main modal
         setIsModalDelivery(true);
     };
