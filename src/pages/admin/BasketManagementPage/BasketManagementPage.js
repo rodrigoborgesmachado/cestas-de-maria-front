@@ -8,7 +8,6 @@ import { format, addDays, subDays, isBefore, startOfDay } from "date-fns";
 import "./BasketManagementPage.css";
 import { maskCPF, maskPhone } from "../../../utils/masks";
 import BasketDeliveryModal from "../../../components/admin/Modals/BasketDeliveryModal/BasketDeliveryModal";
-import MessageModal from "../../../components/common/Modals/MessageModal/MessageModal";
 import SelectFamilyModal from "../../../components/admin/Modals/SelectFamilyModal/SelectFamilyModal";
 import { getLastDayOfWeekByDate } from "../../../utils/functions";
 import ConfirmModal from "../../../components/common/Modals/ConfirmModal/ConfirmModal";
@@ -23,7 +22,6 @@ const BasketManagementPage = () => {
     const [selectedDelivery, setSelectedDelivery] = useState(null); // For Modal
     const [selectedFamily, setSelectedFamily] = useState(null); // For Modal
     const [showLegend, setShowLegend] = useState(false); // Toggle Legenda
-    const [showMessageModal, setShowMessageModal] = useState(false); // Controls the Message Modal
     const [refresh, setRefresh] = useState(false); // Controls the Message Modal
     const [showSelectFamilyModal, setShowSelectFamilyModal] = useState(false);
     const [updateStatusModal, setUpdateStatusModal] = useState(false);
@@ -94,12 +92,8 @@ const BasketManagementPage = () => {
         const today = startOfDay(new Date());
         const selectedDate = startOfDay(date);
 
-        if (isBefore(selectedDate, today)) {
-            setShowMessageModal(true); // Show message modal if date is in the past
-        } else {
-            setSelectedDelivery(delivery); // Open the main modal
-            setIsModalDelivery(true);
-        }
+        setSelectedDelivery(delivery); // Open the main modal
+        setIsModalDelivery(true);
     };
 
     const updateStatus = async (id, status) => {
@@ -289,16 +283,6 @@ const BasketManagementPage = () => {
                     </div>
                 )}
             </button>
-
-            {/* Render Message Modal if date is in the past */}
-            {showMessageModal && (
-                <MessageModal
-                    isOpen={showMessageModal}
-                    message="As entregas desta semana já foram finalizadas. Nenhuma alteração pode ser feita."
-                    click={() => setShowMessageModal(false)}
-                    optionText="Fechar"
-                />
-            )}
 
             {showSelectFamilyModal && (
                 <SelectFamilyModal
