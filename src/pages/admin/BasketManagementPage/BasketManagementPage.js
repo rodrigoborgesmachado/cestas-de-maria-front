@@ -104,10 +104,10 @@ const BasketManagementPage = () => {
                     const history = await basketDeliveryApi.getBasketDeliveryHistoryByFamily(response.Familyid);
                     setSelectedFamily(response.Familyid);
                 
-                    if (history.length > 0) {
+                    if (history.length > 1) {
                         history.sort((a, b) => new Date(b.Created) - new Date(a.Created));
                 
-                        if (history[0].Deliverystatusid === 4) {
+                        if (history[1].Deliverystatusid === 4) {
                             openUpdateFamilyStatus();
                             return; 
                         }
