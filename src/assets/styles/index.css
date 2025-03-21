@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@100..900&family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
 :root {
     /* Background Colors */
     --background-color: #FAFAFA; 
@@ -74,7 +76,7 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Jost';
     background-color: var(--background-color);
     color: var(--text-color-primary);
     width: 100%;
@@ -100,6 +102,7 @@ body {
 }
 
 .main-button {
+    font-family: 'Jost';
     padding: var(--default-spacing);
     background-color: var(--button-color-primary);
     color: var(--text-color-button);
