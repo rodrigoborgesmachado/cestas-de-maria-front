@@ -1,4 +1,4 @@
-import { startOfWeek, addDays, format } from "date-fns";
+import { startOfWeek, startOfYear, addDays, format, addWeeks } from "date-fns";
 
 export const putDateOnPatternSimple = (date) => {
   if (!date) return ''; // Return empty string if date is null or undefined
@@ -77,4 +77,16 @@ export const copyToMemory = async (text) => {
       console.error("Erro ao copiar o texto: ", err);
       return false;
   }
+};
+
+export const getSaturdayFromWeek = (weekNumber, year) => {
+  let baseDate = startOfYear(new Date(year, 0, 1));
+  let date = addWeeks(baseDate, weekNumber - 1);
+
+  // Ajusta até chegar no sábado
+  while (date.getDay() !== 6) {
+      date = addDays(date, 1);
+  }
+
+  return date.toLocaleDateString("pt-BR"); // ou use format(date, "dd/MM/yyyy")
 };

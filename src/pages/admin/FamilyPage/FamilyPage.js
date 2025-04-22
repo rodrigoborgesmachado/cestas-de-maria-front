@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setLoading } from '../../../services/redux/loadingSlice';
 import { toast } from 'react-toastify';
 import { maskCPF, maskPhone } from '../../../utils/masks';
-import { putDateOnPattern } from '../../../utils/functions';
+import { getSaturdayFromWeek } from '../../../utils/functions';
 
 const FamilyPage = () => {
     const { code } = useParams();
@@ -120,7 +120,7 @@ const FamilyPage = () => {
                                         <tr key={delivery.Id}>
                                             <td data-label='Id'>{delivery.Id}</td>
                                             <td data-label='Nº Semana'>{delivery.Weekofmonth}</td>
-                                            <td data-label='Data'>{putDateOnPattern(delivery.Created)}</td>
+                                            <td data-label='Data'>{getSaturdayFromWeek(delivery.Weekofmonth, new Date(delivery.Created).getFullYear())}</td>
                                             <td data-label='Status'>{delivery.Basketdeliverystatus?.Description}</td>
                                         </tr>
                                     ))}

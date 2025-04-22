@@ -105,7 +105,7 @@ const BasketManagementPage = () => {
                     setSelectedFamily(response.Familyid);
                 
                     if (history.length > 1) {
-                        history.sort((a, b) => new Date(b.Created) - new Date(a.Created));
+                        history.sort((a, b) => b.Weekofmonth);
                 
                         if (history[1].Deliverystatusid === 4) {
                             openUpdateFamilyStatus();
