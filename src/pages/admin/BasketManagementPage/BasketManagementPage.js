@@ -107,7 +107,7 @@ const BasketManagementPage = () => {
                     if (history.length > 1) {
                         history.sort((a, b) => b.Weekofmonth);
                 
-                        if (history[1].Deliverystatusid === 4) {
+                        if (history[0].Deliverystatusid === 4) {
                             openUpdateFamilyStatus();
                             return; 
                         }
