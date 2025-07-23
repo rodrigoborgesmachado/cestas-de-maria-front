@@ -252,6 +252,7 @@ const BasketManagementPage = () => {
                         >
                             <h3>{index+1} - {delivery.Families.Name}</h3>
                             <p><strong>Família:</strong> {delivery.Families.Familystatus.Description}</p>
+                            <p><strong>Pessoas:</strong> {delivery.Families.Adults+delivery.Families.Children} ({delivery.Families.Children} {delivery.Families.Children > 1 ? 'crianças' : 'criança'})</p>
                             <p><strong>Cestas:</strong> {delivery.Families.Basketquantity}</p>
                             <p><strong>Bairro:</strong> {delivery.Families.Neighborhood}</p>
                             <p><strong>Documento:</strong> {maskCPF(delivery.Families.Document)}</p>
