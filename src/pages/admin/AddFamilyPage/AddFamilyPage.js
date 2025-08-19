@@ -167,7 +167,7 @@ const AddFamilyPage = () => {
 
                     <div className="form-group">
                         <label>Telefone:</label>
-                        <input type="text" name="phone" value={maskPhone(formData.phone)} onChange={handleChange} required onBlur={() => getFamilyByPhone(formData.document)}/>
+                        <input type="text" name="phone" value={maskPhone(formData.phone)} onChange={handleChange} required onBlur={() => getFamilyByPhone(formData.phone)}/>
                         {
                             phoneExists && 
                             <label className="danger">{phoneExists}</label>
