@@ -43,6 +43,9 @@ const familiesApi = {
             const response = await api.get(`/Families/getbydocument/${document}`, { params });
             return response.data;
         } catch (error) {
+            if (error.response && error.response.status === 204) {
+                return null;
+            }
             console.error('Error fetching family by document:', error);
             throw error;
         }
