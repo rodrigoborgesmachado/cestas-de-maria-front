@@ -92,7 +92,7 @@ const DashboardPage = () => {
         datasets: [
             {
                 label: "Entregas",
-                data: chartValues.reverse(),
+                data: chartValues,
                 backgroundColor: "#1B4332",
                 borderColor: "#142E24",
                 borderWidth: 1,
