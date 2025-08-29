@@ -216,7 +216,7 @@ const FamilyListPage = () => {
                             ? '' : 
                             'missing-info'
                         }>
-                            <span className='option-link' onClick={() => navigate('editar/' + item.Id)}><EditIcon/></span>
+                            <span className='option-link' onClick={()=> window.open('familias/editar/' + item.Id,'_blank')}><EditIcon/></span>
                         </td>
                         <td className={
                             item.Familystatus.Id === 1 
