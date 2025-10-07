@@ -51,7 +51,7 @@ const MailMessageListPage = () => {
     const reenviar = async (id) => {
         try{
             dispatch(setLoading(true));
-            var result = await mailMessageApi.resendMailMessageByCode(id);
+            var result = await mailMessageApi.resendMailMessage(id);
             if(result.Mailmessagefamilystatus && result.Mailmessagefamilystatus === 'Sent'){
                 toast.success('Email reenviado!')
                 setRefresh(prev => !prev);

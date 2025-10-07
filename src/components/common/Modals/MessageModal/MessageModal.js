@@ -6,10 +6,10 @@ const MessageModal = ({isOpen, message, click, optionText = 'fechar'}) => {
 
     return (
         <div className="loading-backdrop">
-        <div className="loading-modal">
-            <span>{message}</span>
-            <button className='main-button margin-top-default' onClick={click}>{optionText}</button>
-        </div>
+            <div className="loading-modal">
+                <span>{message}</span>
+                <button className='main-button margin-top-default' onClick={click}>{optionText}</button>
+            </div>
         </div>
     );
 };

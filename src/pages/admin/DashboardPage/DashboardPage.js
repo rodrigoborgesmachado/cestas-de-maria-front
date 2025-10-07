@@ -108,14 +108,8 @@ const DashboardPage = () => {
             <div className="dashboard-summary">
                 <div className="summary-card">Famílias em Atendimento: {dashboardData.QuantityFamilyInProgress}</div>
                 <div className="summary-card">Famílias Cortadas: {dashboardData.QuantityFamilyCutted}</div>
-                <div className="summary-card">Famílias Elegíveis: {dashboardData.QuantityFamilyEligible}</div>
-                <div className="summary-card">Famílias em Espera: {dashboardData.QuantityFamilyWaiting}</div>
-                <div className="summary-card">Entregas Pendentes: {dashboardData.QuantityDeliveryPending}</div>
-                <div className="summary-card">Entregas Concluídas: {dashboardData.QuantityDeliveryCompleted}</div>
-                <div className="summary-card">Entregas Perdidas: {dashboardData.QuantityDeliveryMissed}</div>
-                <div className="summary-card">Entregas Solicitadas: {dashboardData.QuantityDeliveryCalled}</div>
+                <div className="summary-card">Famílias Elegíveis/Espera: {dashboardData.QuantityFamilyEligible + dashboardData.QuantityFamilyWaiting}</div>
                 <div className="summary-card">Nº Cestas Doadas: {dashboardData.QuantityBasketDelivered}</div>
-                <div className="summary-card">Cestas Não Doadas: {dashboardData.QuantityBasketNotDelivered}</div>
             </div>
             <div className="dashboard-chart">
                 <h2>Entregas por Semana</h2>
